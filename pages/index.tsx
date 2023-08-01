@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Categorize from '../components/card/categorize'
+import Cloze from '@/components/card/cloze'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -8,7 +9,9 @@ export default function Home() {
     <main
       className={`flex min-h-screen min-w-200 flex-col items-center justify-between p-24 ${inter.className}`}
     >
+      <Cloze />
       <Categorize />
+
     </main>
   )
 }
