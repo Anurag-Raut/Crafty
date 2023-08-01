@@ -25,9 +25,9 @@ export const Item = ({ item,id }: Props) => {
     >
       <div className=" border border-gray-700 m-2 p-2 w-full flex justify-between" >
         <span >{item.item}</span>
-      
+        <ReorderIcon dragControls={dragControls} />
       </div>
-      <ReorderIcon dragControls={dragControls} />
+     
       
     </Reorder.Item>
   );
