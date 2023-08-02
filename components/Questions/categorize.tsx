@@ -4,7 +4,7 @@ import InputText from '../inputText';
 import { motion } from "framer-motion"
 import Select from '../select';
 import { useHook } from '@/hooks/reduxhook';
-export default function Categorize({ id ,parent}) {
+export default function Categorize({ id,parent }:{parent?:string,id:string}) {
   const { value: categories, handleChange: setCategories } = useHook(id, 'categories',parent);
   const { value: categoriesItems, handleChange: setCategoriesItems } = useHook(id, 'categoriesItems',parent);
 

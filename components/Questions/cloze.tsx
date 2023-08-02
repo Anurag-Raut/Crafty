@@ -7,7 +7,7 @@ import { useHook } from "@/hooks/reduxhook";
 
 
 
-export default function Cloze({ id,parent }) {
+export default function Cloze({ id,parent }:{parent?:string,id:string}) {
     const {value:text,handleChange:setText}=useHook(id,'text',parent)
     const [content, setContent] = useState<string>(text);
     const {value:underlinedContents,handleChange:setUnderlinedContents}=useHook(id,'underlinedContents',parent)
@@ -74,7 +74,7 @@ export default function Cloze({ id,parent }) {
             // console.log(contents);
         }
     }, [text]);
-    console.log({ text, content })
+    console.log(underlinedContents,'underlinedContentes')
 
 
     // Helper function to check if the given range contains underlined text
@@ -104,7 +104,7 @@ export default function Cloze({ id,parent }) {
             {
                 underlinedContents && <Reorder.Group axis="y" className=' w-[full] ' onReorder={setUnderlinedContents} values={underlinedContents}>
                 {underlinedContents?.map((data: any) => (
-                    <Item key={data.index} id={data.index} item={data} value={data.item} >
+                    <Item key={data.index} id={data.index} item={data}  >
                         {
                             data.item
                         }

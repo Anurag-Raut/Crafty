@@ -6,7 +6,7 @@ import { Item } from "../item";
 const { Reorder, useDragControls } = require("framer-motion")
 
 
-export default function MCQ({ id ,parent}) {
+export default function MCQ({ id,parent }:{parent?:string,id:string}) {
     const { value: description, handleChange: setDescription } = useHook(id, 'description',parent);
     const { value: options, handleChange: setOptions } = useHook(id, 'options',parent);
     const [text, setText] = useState('');

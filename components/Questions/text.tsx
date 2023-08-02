@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 
 
-export default function Text({id,parent}){
+export default function Text({ id,parent }:{parent?:string,id:string}){
     const {value:description,handleChange:setDescription}=useHook(id,'description',parent)
     const {value:maxLimit,handleChange:setMaxLimit}=useHook(id,'maxLimit',parent);
     const {value:minLimit,handleChange:setMinLimit}=useHook(id,'minLimit',parent);
