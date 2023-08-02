@@ -5,7 +5,7 @@ const { Reorder, useDragControls } = require("framer-motion")
 export default function RichText() {
     const [content, setContent] = useState<string>("");
     const [underlinedContents, setUnderlinedContents] = useState<{}[]>([]);
-    const [text, setText] = useState<string>()
+    const [text, setText] = useState<string>('')
     const divRef = useRef<HTMLDivElement>(null);
     // const dragControls = useDragControls()
 
@@ -42,7 +42,7 @@ export default function RichText() {
         }
     };
 
-    console.log(text)
+    // console.log(text)
     useEffect(() => {
         const updatedContent = divRef.current?.innerHTML;
         setText(updatedContent || "");
@@ -58,10 +58,10 @@ export default function RichText() {
                 contents.push({ item: cleanedContent, index });
             });
             setUnderlinedContents(contents);
-            console.log(contents);
+            // console.log(contents);
         }
     }, [text]);
-    console.log(underlinedContents)
+    console.log({text,content})
 
 
     // Helper function to check if the given range contains underlined text
@@ -81,13 +81,15 @@ export default function RichText() {
                     const updatedContent = divRef.current?.innerHTML;
                     setText(updatedContent || "");
                 }}
-                dangerouslySetInnerHTML={{ __html: content }} // Use dangerouslySetInnerHTML carefully
+                dangerouslySetInnerHTML={{ __html: content }} 
             />
             <button onClick={handleUnderline}> underline</button>
-            <Reorder.Group axis="y" onReorder={setUnderlinedContents} values={underlinedContents}>
+            <p>  Reorder the Items in their corrext Sequence </p>
+          
+            <Reorder.Group axis="y" className=' w-[full] ' onReorder={setUnderlinedContents} values={underlinedContents}>
       {underlinedContents.map((data:any) => (
         <Item key={data.index} id={data.index} item={data} />
-        // <div></div>
+     
       ))}
     </Reorder.Group>
         </div>

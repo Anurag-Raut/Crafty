@@ -1,10 +1,10 @@
 import RichText from "../RichText";
 import InputText from "../inputText";
-import Card from "./cards";
+import Card from "../card/cards";
 
 
 
-export default function Cloze(){
+export default function Cloze({id}){
     return(
         <Card>
             <RichText />
