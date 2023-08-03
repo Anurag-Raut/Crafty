@@ -4,7 +4,7 @@ import Categorize from '../components/Questions/categorize'
 import Cloze from '@/components/Questions/cloze'
 import Comprehension from '@/components/Questions/comprehension'
 import { useEffect, useState } from 'react'
-import { addQuestion, updateItem } from "../redux/reducers";
+import { addQuestion, updateItem, updateMainQuestions } from "../redux/reducers";
 import { useDispatch, useSelector } from "react-redux";
 import Select from '@/components/select'
 import {useIsMounted} from 'usehooks-ts'
@@ -12,6 +12,10 @@ import Text from '@/components/Questions/text'
 import MCQ from '@/components/Questions/mcq'
 import uniqid from 'uniqid';
 import { Item } from '@/components/item'
+import { submit } from '@/functions/databseFunctions'
+import { addItem } from '@/functions/addItem'
+import { useHook } from '@/hooks/reduxhook'
+import ClozeRenderer from '@/components/Renderer/clozeRenderer'
 const { Reorder } = require('framer-motion')
 const inter = Inter({ subsets: ['latin'] })
 interface Question{
@@ -67,6 +71,8 @@ export default function Home() {
             return <Text id={questionId} />
         case 'categorize':
           return <Categorize id={questionId} />
+        case 'comprehension':
+          return <Comprehension id={questionId} />
         
         default:
             return null;
@@ -74,14 +80,23 @@ export default function Home() {
 };
 
 
-  const handleAddItem = (index) => {
+  const handleAddItem = () => {
     let id=uniqid();
-    dispatch(addQuestion({ index:id,type }));
+    const initialState=addItem(id,type);
+    // if(!questions){
+    //     setQuestions([initialState])
+    // }
+    // else{
+    //   setQuestions([...questions,initialState])
+    // }
+    dispatch(addQuestion(initialState))
+
   };
-  
+  // const {value:questions,handleChange:setQuestions}=useHook('Questions','questions')
   const questions = useSelector((state:any) => state.Questions);
-  const update = (index, key, value) => {
-    dispatch(updateItem({ index, key, value }));
+  const update = (newvalue) => {
+    // console.log(index,key,value,'abeee')
+    dispatch(updateMainQuestions(newvalue));
   };
   const [q,setQ]=useState([])
 
@@ -92,7 +107,7 @@ export default function Home() {
       className={`flex min-h-screen min-w-200 flex-col items-center justify-between p-24 ${inter.className}`}
     >
         <Select onChange={(e)=>setType(e.target.value)} options={types} />
-      <button onClick={()=>handleAddItem(0)}>Add Item</button> 
+      <button onClick={()=>handleAddItem()}>Add Item</button> 
       <div>
 
 
@@ -118,7 +133,13 @@ export default function Home() {
 
 
       </div>
-     
+
+    
+
+      <button onClick={()=>{submit(questions)}} >Submit</button>
+
+      <ClozeRenderer />
+    
      
 
     </main>

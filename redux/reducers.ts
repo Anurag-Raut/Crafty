@@ -15,6 +15,9 @@ const itemsSlice = createSlice({
     addQuestion: (state, action) => {
         const { index,type } = action.payload;
         const newItem = { index: index,type:type };
+        if(!state.Questions){
+          state.Questions=[]
+        }
         state.Questions = [...state.Questions, newItem];
         console.log(state.Questions)
       },
@@ -33,6 +36,11 @@ const itemsSlice = createSlice({
         console.log(parentQuest,'questt')
         const question=parentQuest['questions_comprehension'].find((item)=>item.index===index)
         question[key]=value;
+    },
+    updateMainQuestions:(state,action)=>{
+      const newvalue=action.payload;
+       state.Questions=newvalue
+      // question=value;
     }
     
   },
@@ -46,6 +54,6 @@ const itemsSlice = createSlice({
 }
 });
 
-export const { addQuestion,updateItem,updateNestedItem } = itemsSlice.actions;
+export const { addQuestion,updateItem,updateNestedItem ,updateMainQuestions} = itemsSlice.actions;
 
 export default itemsSlice.reducer;

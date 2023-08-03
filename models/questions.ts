@@ -1,46 +1,19 @@
+const mongoose = require('mongoose');
 
-import mongoose, { Document } from 'mongoose';
+// Define the schema for each question type
 
-interface BaseQuestion extends Document {
-    description: string;
-    type: 'text' | 'mcq' | 'categorize' | 'cloze' | 'comprehension';
-  }
-  
-  interface TextQuestion extends BaseQuestion {
-    type: 'text';
-    minWordLimit: number;
-    maxWordLimit: number;
-  }
-  
-  interface McqQuestion extends BaseQuestion {
-    type: 'mcq';
-    options: string[];
-    answers: string[];
-  }
-  
-  interface ClozeQuestion extends BaseQuestion {
-    type: 'cloze';
-    underlinedContents: {}[];
-    contents: string;
-  }
-  
-  interface CategorizeQuestion extends BaseQuestion {
-    type: 'categorize';
-    categories: string[];
-    categoriesItems: {}[];
-  }
-  
-  interface ComprehensionQuestion extends BaseQuestion {
-    type: 'comprehension';
-    questions: BaseQuestion[];
-  }
-  
-  type Question = TextQuestion | McqQuestion | ClozeQuestion | CategorizeQuestion | ComprehensionQuestion;
-  
-const questionSchema = new mongoose.Schema<Question>({
-  description: String,
-  type: String,
- 
-});
 
-export default mongoose.model<Question>('Question', questionSchema);
+
+// Define the schema for an array of Question objects
+const QuestionsArraySchema = new mongoose.Schema(
+  {
+  questions: [{ type: mongoose.Schema.Types.Mixed,  required: true}]
+
+  },
+  { strict: 'throw' } // Enforce strict validation
+);
+const QuestionsArray = mongoose.models.QuestionsArray || mongoose.model('QuestionsArray', QuestionsArraySchema);
+
+
+export default QuestionsArray
+
