@@ -1,10 +1,10 @@
 
-import {QuestionsArraySchema} from '../models/questions'; 
+
 
 import {connectToDatabase} from '@/db';
 async function submit(document){
 
-    
+    console.log(document,'docuuuuuuuuuu')
     const questions=[]
     async function save (){
         try {

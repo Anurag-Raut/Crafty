@@ -17,12 +17,12 @@ const ClozeQuestionSchema = new mongoose.Schema({
     required: true
   },
   underlinedContents: [{}], // Define the schema for this property as needed
-  contents: {
+  text: {
     type: String,
     required: true
   }
 }, { strict: 'throw' });
 
-const ClozeQuestion = mongoose.model('ClozeQuestion', ClozeQuestionSchema);
+const ClozeQuestion = mongoose.models.ClozeQuestion|| mongoose.model('ClozeQuestion', ClozeQuestionSchema);
 
 export default ClozeQuestion;

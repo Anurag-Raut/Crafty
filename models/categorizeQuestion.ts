@@ -23,6 +23,6 @@ const CategorizeQuestionSchema = new mongoose.Schema({
   categoriesItems: [{}] // Define the schema for this property as needed
 }, { strict: 'throw' });
 
-const CategorizeQuestion = mongoose.model('CategorizeQuestion', CategorizeQuestionSchema);
+const CategorizeQuestion =  mongoose.models.CategorizeQuestion || mongoose.model('CategorizeQuestion', CategorizeQuestionSchema);
 
 export default CategorizeQuestion;

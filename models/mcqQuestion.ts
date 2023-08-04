@@ -17,15 +17,12 @@ const McqQuestionSchema = new mongoose.Schema({
     required: true
   },
   options: {
-    type: [String],
+    type: [{}],
     required: true
   },
-  answers: {
-    type: [String],
-    required: true
-  }
+ 
 }, { strict: 'throw' });
 
-const McqQuestion = mongoose.model('McqQuestion', McqQuestionSchema);
+const McqQuestion = mongoose.models.McqQuestion||  mongoose.model('McqQuestion', McqQuestionSchema);
 
 export default McqQuestion;

@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?
 
     try{
         let {document} = (req.body)
-        console.log()
+        console.log(document)
         // const newPost = new QuestionsArray({
         //   questions:bodyObject.document
         // });

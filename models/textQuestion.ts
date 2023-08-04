@@ -26,6 +26,6 @@ const TextQuestionSchema = new mongoose.Schema({
   }
 }, { strict: 'throw' });
 
-const TextQuestion = mongoose.model('TextQuestion', TextQuestionSchema);
+const TextQuestion = mongoose.models.TextQuestion || mongoose.model('TextQuestion', TextQuestionSchema);
 
 export default TextQuestion;

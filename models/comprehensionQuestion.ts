@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+import ClozeQuestion from './clozeQuestion';
+import CategorizeQuestion from './categorizeQuestion';
+import McqQuestion from './mcqQuestion';
+import TextQuestion from './textQuestion';
 
 const BaseQuestionSchema = new mongoose.Schema({
   description: {
@@ -32,10 +36,11 @@ const ComprehensionQuestionSchema = new mongoose.Schema({
     enum: ['comprehension'],
     required: true
   },
-  questions_comprehension: {
-    type: [BaseQuestionSchema],
-    required: true
-  },
+  questions_comprehension: [{
+    type:mongoose.Schema.Types.Mixed,
+    enum:[ClozeQuestion,CategorizeQuestion,McqQuestion,TextQuestion],
+  
+  }],
   comprehensionText:{
     type:String,
     required:true
@@ -43,6 +48,6 @@ const ComprehensionQuestionSchema = new mongoose.Schema({
   }
 }, { strict: 'throw' });
 
-const ComprehensionQuestion = mongoose.model('ComprehensionQuestion', ComprehensionQuestionSchema);
+const ComprehensionQuestion = mongoose.models.ComprehensionQuestion || mongoose.model('ComprehensionQuestion', ComprehensionQuestionSchema);
 
 export default ComprehensionQuestion;
