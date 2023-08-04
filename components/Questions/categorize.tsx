@@ -52,7 +52,7 @@ export default function Categorize({ id,parent }:{parent?:string,id:string}) {
   }
   console.log(categoriesItems);
   return (
-    <Card>
+    <Card color={'base-300'} >
       <div>
         <InputText value={description} label={'description'} onChange={(e) => { setDescription(e.target.value) }} />
 

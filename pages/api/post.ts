@@ -1,11 +1,11 @@
 const { connectToDatabase } = require("@/db");
 import mongoose from 'mongoose'; 
-import QuestionsArray from '@/models/questions';
-import TextQuestion from '@/models/textQuestion';
-import ClozeQuestion from '@/models/clozeQuestion';
-import McqQuestion from '@/models/mcqQuestion';
-import CategorizeQuestion from '@/models/categorizeQuestion';
-import ComprehensionQuestion from '@/models/comprehensionQuestion';
+import QuestionsArray from '@/models/question/questions';
+import TextQuestion from '@/models/question/textQuestion';
+import ClozeQuestion from '@/models/question/clozeQuestion';
+import McqQuestion from '@/models/question/mcqQuestion';
+import CategorizeQuestion from '@/models/question/categorizeQuestion';
+import ComprehensionQuestion from '@/models/question/comprehensionQuestion';
 // const {QuestionsArray,TextQuestion,McqQuestion,ComprehensionQuestion,ClozeQuestion,CategorizeQuestion} =require('../../models/questions')
 export default async function handler(req, res) {
 //   const client = await clientPromise;
@@ -64,6 +64,9 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?
     catch(error){
         console.log(error)
         res.status(400).send(error)
+    }
+    finally{
+      mongoose.disconnect()
     }
      
       break;

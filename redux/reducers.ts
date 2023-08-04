@@ -14,12 +14,13 @@ const itemsSlice = createSlice({
   initialState,
   reducers: {
     addQuestion: (state, action) => {
-        const { index,type } = action.payload;
+        const { index,type,pos } = action.payload;
         const newItem = { index: index,type:type };
         if(!state.Questions){
           state.Questions=[]
         }
-        state.Questions = [...state.Questions, newItem];
+        state.Questions.splice(pos,0,newItem)
+        // state.Questions = [...state.Questions, newItem];
         console.log(state.Questions)
       },
 

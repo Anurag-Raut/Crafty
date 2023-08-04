@@ -6,12 +6,36 @@ import TextRenderer from "@/components/Renderer/textRenderere";
 import Card from "@/components/card/cards";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Render() {
   const router = useRouter();
   const [questions, setQuestions] = useState([]);
   console.log(questions);
   const { id } = router.query;
+  const response =useSelector((state:any)=>state.RenderComponents);
+  const submitResponse=()=>{
+    console.log(response);
+    async function save (){
+      try {
+          let res = await fetch("http://localhost:3000/api/postResponse", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body:JSON.stringify({document:response,id:id})
+            });
+            let allPosts = await res.json();
+      
+          console.log('New response array saved successfully.',allPosts);
+        } catch (error) {
+          console.error('Error saving new question array:', error);
+        }
+    
+  }
+  save()
+
+  }
 
   useEffect(() => {
     if (!id) {
@@ -79,7 +103,11 @@ export default function Render() {
           <Card key={index}>
             {renderQuestionComponent(data.type, data)}
           </Card>
+
+
         ))}
+
+        <button onClick={()=>submitResponse()}>Submit</button>
       </Card>
     </div>
   );

@@ -3,10 +3,27 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import DroppableSpace from './droppableSpace';
 import DraggableItem from './draggableItem';
 import { useRenderHook } from '@/hooks/reduxhook';
+import { useDispatch } from 'react-redux';
+import { updateNestedRenderComponents, updateRenderComponents } from '@/redux/reducers';
 
 export default function CategorizeRenderer({ categories, categoriesItems, id,parent }) {
-    console.log(categories, categoriesItems)
+    const dispatch=useDispatch();
+    
+    useEffect(()=>{
+        function addType(){
+    if(parent){
+        dispatch(updateNestedRenderComponents({index:id,parent,key:'type',value:'categorize'}))
+    }
+    else{
+        dispatch(updateRenderComponents({index:id,key:'type',value:'categorize'}))
+    }
 
+        }
+        addType()
+        
+
+    },[])
+    
 
 
 
@@ -32,7 +49,7 @@ export default function CategorizeRenderer({ categories, categoriesItems, id,par
         })
         setLists(initialState)
 
-    }, [])
+    }, [categories,categoriesItems,lists])
 
     function handleOnDragEnd(result) {
         if (!result.destination) return;

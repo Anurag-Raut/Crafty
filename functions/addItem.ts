@@ -2,10 +2,10 @@ import { addQuestion } from "@/redux/reducers";
 
 
 
-export function addItem(id: string, type: string) {
+export function addItem(id: string, type: string,pos?:number) {
 
 
-  const questionStructure = { type, id, index: id };
+  const questionStructure = { type, id, index: id,pos:pos };
   switch (type) {
     case 'cloze':
       questionStructure['description'] = '';

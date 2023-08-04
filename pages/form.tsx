@@ -17,6 +17,7 @@ import { addItem } from '@/functions/addItem'
 import { useHook } from '@/hooks/reduxhook'
 import ClozeRenderer from '@/components/Renderer/clozeRenderer'
 import CategorizeRenderer from '@/components/Renderer/categorizeRenderer'
+import Card from '@/components/card/cards'
 const { Reorder } = require('framer-motion')
 const inter = Inter({ subsets: ['latin'] })
 interface Question{
@@ -81,9 +82,9 @@ export default function Create() {
 };
 
 
-  const handleAddItem = () => {
+  const handleAddItem = (type,index=0) => {
     let id=uniqid();
-    const initialState=addItem(id,type);
+    const initialState=addItem(id,type,index);
     // if(!questions){
     //     setQuestions([initialState])
     // }
@@ -99,28 +100,31 @@ export default function Create() {
     // console.log(index,key,value,'abeee')
     dispatch(updateMainQuestions(newvalue));
   };
-  const [q,setQ]=useState([])
 
   console.log(questions,'yfyu')
   return (
     mounted?
     <main
-      className={`flex min-h-screen min-w-200 flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`flex w-full min-h-screen min-w-200 flex-col items-center justify-between p-24 ${inter.className}`}
     >
-        <Select onChange={(e)=>setType(e.target.value)} options={types} />
-      <button onClick={()=>handleAddItem()}>Add Item</button> 
+      <Card color={'base-100'}>
+      <Select onChange={(e)=>setType(e.target.value)} options={types} />
+      <button onClick={()=>handleAddItem(type,0)}>Add Item</button> 
       <div>
 
 
       {
-                    questions && <Reorder.Group axis="y" className=' w-[full] ' onReorder={update} values={questions}>
+                    questions && <Reorder.Group axis="y" className=' w-full ' onReorder={update} values={questions}>
                         {
                             questions?.map((data) => {
                                 return (
                                     
-                                    <Item key={data.index} id={data.index} item={data} >
+                                    <Item  key={data.index} id={data.index} item={data} card={true} >
+                                      <div className='w-full'>
+                                      {renderQuestionComponent(data.type, data.index)}
+                                      </div>
                             
-                                        {renderQuestionComponent(data.type, data.index)}
+                                       
                                     
                                   
                                     </Item>
@@ -138,6 +142,8 @@ export default function Create() {
     
 
       <button onClick={()=>{submit(questions)}} >Submit</button>
+        </Card>
+       
 {/* 
       <ClozeRenderer contents={questions[0].text} />
       <CategorizeRenderer categories={questions[1].categories} categoriesItems={questions[1].categoriesItems}/> */}

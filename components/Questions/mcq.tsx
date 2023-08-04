@@ -28,7 +28,9 @@ export default function MCQ({ id,parent }:{parent?:string,id:string}) {
 
 
     return (
-        <Card>
+        <Card color={'base-300'} >
+            <div className="w-full">
+
             <InputText value={description} label='Descipttion' placeholder="descriptoion" onChange={(e) => { setDescription(e.target.value) }} />
             <p>Add options</p>
 
@@ -51,6 +53,7 @@ export default function MCQ({ id,parent }:{parent?:string,id:string}) {
                 }
 
            </div>
+            </div>
             
             
 

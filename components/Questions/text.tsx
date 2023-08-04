@@ -20,9 +20,9 @@ export default function Text({ id,parent }:{parent?:string,id:string}){
 
     return(
 
-        <Card>
-            <InputText value={description} label='Descipttion' placeholder="descriptoion" onChange={(e)=>{setDescription(e.target.value)}} />
-            <div className="flex">
+        <Card color={'base-300'}  >
+            <InputText value={description} label='description' placeholder="descriptoion" onChange={(e)=>{setDescription(e.target.value)}} />
+            <div className="flex justify-around">
                 <InputText value={Number(minLimit)} onChange={(e)=>{setMinLimit(e.target.value)}} type="number" label="Min limit" />
                 <InputText value={Number(maxLimit)} onChange={(e)=>{setMaxLimit(e.target.value)}} type="number" label="Max limit" />
             </div>

@@ -10,7 +10,9 @@ module.exports = {
     extend: {
       colors: {
         // Define your custom colors here
-        "base-100": '#FFFFFF', // Example custom color named 'customColor'
+        "base-100": "#F6F4EB", 
+        "base-400":"#F5F5F5",
+        "base-300":"#D4E2D4",
       },
     },
   },

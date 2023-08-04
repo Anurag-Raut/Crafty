@@ -4,12 +4,27 @@ import ClozeRenderer from "./clozeRenderer";
 import CategorizeRenderer from "./categorizeRenderer";
 import TextRenderer from "./textRenderere";
 import McqRenderer from "./mcqRenderer";
+import { useDispatch } from "react-redux";
+import { updateNestedRenderComponents, updateRenderComponents } from "@/redux/reducers";
 
 
 
 export default function ComprehensionRenderer({descriptionText,comprehensionText,comprehension_array,id}){
     const {value:comprehensionArray,handleChange:setComprehensionArray}=useRenderHook(id,'comprehensionArray')
     console.log(comprehensionArray,'abeee');
+    const dispatch=useDispatch();
+    
+    useEffect(()=>{
+        function addType(){
+  
+        dispatch(updateRenderComponents({index:id,key:'type',value:'comprehension'}))
+    
+
+        }
+        addType()
+        
+
+    },[])
     const renderQuestionComponent = (questionType, data) => {
         switch (questionType) {
           case 'cloze':

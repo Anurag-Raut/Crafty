@@ -72,7 +72,9 @@ export default function Comprehension({ id }) {
 
     return (
 
-        <Card>
+        <Card color={'base-300'} >
+            <div className="w-full">
+
 
             <InputText value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder="Enter description text" label="Description" />
             <InputText value={comprehensionText} onChange={(e) => { setComprehensionText(e.target.value) }} placeholder="Enter comprehension Text" label="Comprehension" />
@@ -82,15 +84,15 @@ export default function Comprehension({ id }) {
                 <button onClick={() => { handleAddQuestion() }} >Add</button>
             </div>
 
-            <div>
+            <div className="w-full">
 
                 {
-                    questions && <Reorder.Group axis="y" className=' w-[full] ' onReorder={setQuestions} values={questions}>
+                    questions && <Reorder.Group axis="y" className='w-full' onReorder={setQuestions} values={questions}  >
                         {
                             questions.map((data) => {
                                 return (
                                     
-                                    <Item key={data.id} id={data.id} item={data} >
+                                    <Item card={true} key={data.id} id={data.id} item={data} >
                             
                                         {renderQuestionComponent(data.type, data.id)}
                                     
@@ -105,6 +107,7 @@ export default function Comprehension({ id }) {
 
             </div>
 
+            </div>
 
 
 

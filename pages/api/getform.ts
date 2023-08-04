@@ -1,6 +1,6 @@
 const { connectToDatabase } = require("@/db");
 import mongoose from 'mongoose'; 
-import QuestionsArray from '@/models/questions';
+import QuestionsArray from '@/models/question/questions';
 
 export default async function handler(req, res) {
 mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?retryWrites=true&w=majority', {

@@ -33,7 +33,7 @@ export default function Home(){
   };
     console.log(logged)
     return(
-        <div className='bg-base-100'>
+        <div >
            {
                 user && <div>
                     < div onClick={()=>{handleLinkClick()}}>

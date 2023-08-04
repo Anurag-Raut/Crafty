@@ -83,7 +83,7 @@ export default function Cloze({ id,parent }:{parent?:string,id:string}) {
         return parentElement?.tagName === "U";
     };
     return (
-        <Card>
+        <Card color={'base-300'}>
 
 
             <div>

@@ -3,6 +3,8 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import DraggableItem from './draggableItem';
 import DroppableSpace from './droppableSpace';
 import { useRenderHook } from '@/hooks/reduxhook';
+import { useDispatch } from 'react-redux';
+import { updateNestedRenderComponents, updateRenderComponents } from '@/redux/reducers';
 
 
 export default function ClozeRenderer({contents,id,parent}) {
@@ -11,6 +13,24 @@ export default function ClozeRenderer({contents,id,parent}) {
   const {value:bag,handleChange:setBag}=useRenderHook(id,'bag',parent);
   const {value:spaces,handleChange:setSpaces}=useRenderHook(id,'spaces',parent);
   // const [spaces, setSpaces] = useState([]);
+
+  const dispatch=useDispatch();
+    
+  useEffect(()=>{
+      function addType(){
+  if(parent){
+      dispatch(updateNestedRenderComponents({index:id,parent,key:'type',value:'cloze'}))
+  }
+  else{
+      dispatch(updateRenderComponents({index:id,key:'type',value:'cloze'}))
+  }
+
+      }
+      addType()
+      
+
+  },[])
+  
  
 
   useEffect(() => {
