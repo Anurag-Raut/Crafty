@@ -6,6 +6,8 @@ import TextRenderer from "./textRenderere";
 import McqRenderer from "./mcqRenderer";
 import { useDispatch } from "react-redux";
 import { updateNestedRenderComponents, updateRenderComponents } from "@/redux/reducers";
+import Card from "../card/cards";
+import Dropdown from "../dropdown";
 
 
 
@@ -28,7 +30,7 @@ export default function ComprehensionRenderer({descriptionText,comprehensionText
     const renderQuestionComponent = (questionType, data) => {
         switch (questionType) {
           case 'cloze':
-            return <ClozeRenderer id={data.index} contents={data.text}     parent={id} />;
+            return <ClozeRenderer description={data.description} id={data.index} contents={data.text}     parent={id} />;
           case 'categorize':
             return (
               <CategorizeRenderer
@@ -56,16 +58,27 @@ export default function ComprehensionRenderer({descriptionText,comprehensionText
     },[])
     return (
         <div>
+            <label className='text-lg font-bold'>Description : </label>
             <div>{descriptionText}</div>
+            <label className='text-lg font-bold'>Comprehension : </label>
             <div>{comprehensionText}</div>
+           
             <div>
                 {
-                    comprehensionArray?.map((data)=>{
-                        return renderQuestionComponent(data.type,data)
-
-                    })
+                   comprehensionArray?.map((data,index) => (
+                    
+                    <Dropdown index={index+1} >
+                  
+                    <Card key={data.id}> {/* Make sure to add a unique 'key' prop */}
+                      {renderQuestionComponent(data.type, data)}
+                    </Card>
+                    </Dropdown>
+                  ))
                 }
             </div>
+
+      
+            
 
         </div>
     )

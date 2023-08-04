@@ -14,12 +14,20 @@ const itemsSlice = createSlice({
   initialState,
   reducers: {
     addQuestion: (state, action) => {
-        const { index,type,pos } = action.payload;
+        const { index,type,pos,comprehension,parentId } = action.payload;
         const newItem = { index: index,type:type };
         if(!state.Questions){
           state.Questions=[]
         }
-        state.Questions.splice(pos,0,newItem)
+        if(comprehension){
+          console.log(index)
+          let question=state.Questions.find((q)=>q.index===parentId);
+          question['questions_comprehension'].splice(pos,0,newItem)
+        }
+        else{
+          state.Questions.splice(pos,0,newItem)
+
+        }
         // state.Questions = [...state.Questions, newItem];
         console.log(state.Questions)
       },
@@ -69,6 +77,18 @@ const itemsSlice = createSlice({
       
       
     },
+    deleteQuestion:(state,action)=>{
+      const{index,comprehension,parentId}=action.payload;
+      if(comprehension){
+        let question=state.Questions.find((q)=>q.index===parentId);
+        console.log(question)
+        question['questions_comprehension'].splice(index,1);
+      }
+      else{
+        state.Questions.splice(index, 1);
+      }
+
+    },
     resetState: () => initialState,
     
     
@@ -83,6 +103,6 @@ const itemsSlice = createSlice({
 }
 });
 
-export const { addQuestion,updateItem,updateNestedItem,updateNestedRenderComponents ,updateMainQuestions,updateRenderComponents,resetState} = itemsSlice.actions;
+export const { addQuestion,updateItem,deleteQuestion,updateNestedItem,updateNestedRenderComponents ,updateMainQuestions,updateRenderComponents,resetState} = itemsSlice.actions;
 
 export default itemsSlice.reducer;

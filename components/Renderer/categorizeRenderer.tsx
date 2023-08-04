@@ -6,29 +6,51 @@ import { useRenderHook } from '@/hooks/reduxhook';
 import { useDispatch } from 'react-redux';
 import { updateNestedRenderComponents, updateRenderComponents } from '@/redux/reducers';
 
-export default function CategorizeRenderer({ categories, categoriesItems, id,parent }) {
-    const dispatch=useDispatch();
-    
-    useEffect(()=>{
-        function addType(){
-    if(parent){
-        dispatch(updateNestedRenderComponents({index:id,parent,key:'type',value:'categorize'}))
-    }
-    else{
-        dispatch(updateRenderComponents({index:id,key:'type',value:'categorize'}))
-    }
+export default function CategorizeRenderer({ categories, categoriesItems, id, parent }) {
+    const dispatch = useDispatch();
+    const lightBeautifulColors = [
+        '#A0C3D2', // Peach
+        '#FFEECC', // Salmon
+        '#DDFFBB', // Apricot
+        '#FEF2F4', // Watermelon
+        '#D4A5A5', // Misty Rose
+        '#FFC3A0', // Coral
+        '#FF6B6B', // Light Coral
+        '#DAA520', // Goldenrod
+        '#FFAC33', // Sunglow
+        '#FF968A', // Pastel Red
+        '#FFD700', // Gold
+        '#FFB6C1', // Light Pink
+        '#FF9AA2', // Salmon Pink
+        '#F08080', // Light Coral
+        '#FFA07A', // Light Salmon
+        '#FF82AB', // Pink
+        '#FF6F61', // Tangerine
+        '#FF6347', // Tomato
+        '#E9967A', // Dark Salmon
+        '#FFA500', // Orange
+      ];
+
+    useEffect(() => {
+        function addType() {
+            if (parent) {
+                dispatch(updateNestedRenderComponents({ index: id, parent, key: 'type', value: 'categorize' }))
+            }
+            else {
+                dispatch(updateRenderComponents({ index: id, key: 'type', value: 'categorize' }))
+            }
 
         }
         addType()
-        
 
-    },[])
+
+    }, [])
+
+
+
+
     
-
-
-
-    // const [lists, setLists] = useState({});
-    const { value: lists, handleChange: setLists } = useRenderHook(id, 'lists',parent)
+    const { value: lists, handleChange: setLists } = useRenderHook(id, 'lists', parent)
 
 
 
@@ -36,7 +58,7 @@ export default function CategorizeRenderer({ categories, categoriesItems, id,par
         if (!categories || !categoriesItems) {
             return
         }
-        if(lists){
+        if (lists) {
             return
         }
         let initialState = { bag: [] }
@@ -49,14 +71,14 @@ export default function CategorizeRenderer({ categories, categoriesItems, id,par
         })
         setLists(initialState)
 
-    }, [categories,categoriesItems,lists])
+    }, [categories, categoriesItems, lists])
 
     function handleOnDragEnd(result) {
         if (!result.destination) return;
 
         const sourceList = lists[result.source.droppableId];
         const destinationList = lists[result.destination.droppableId];
-        if(sourceList===destinationList){
+        if (sourceList === destinationList) {
             return
         }
         console.log(sourceList, 'dest', destinationList, result.source.index)
@@ -80,14 +102,15 @@ export default function CategorizeRenderer({ categories, categoriesItems, id,par
 
 
 
-        <div className='h-fit m-2'>
+        <div className='h-full m-2'>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <div className=''>
-                    <DroppableSpace>
+                <div className='min-h-[200px] h-[200px]  '>
+                    <label className='text-lg font-bold'>Items : </label>
+                    <DroppableSpace fit={false} color={lightBeautifulColors[0]}>
                         <Droppable droppableId={'bag'} >
                             {(provided) => (
                                 <ul
-                                    className="characters flex"
+                                    className="characters h-full flex flex-wrap "
                                     style={{ listStyle: 'none', padding: '10px', border: '1px solid #ddd' }}
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
@@ -96,6 +119,7 @@ export default function CategorizeRenderer({ categories, categoriesItems, id,par
                                         <Draggable key={data} draggableId={data} index={index}>
                                             {(provided) => (
                                                 <li
+                                                
                                                     style={{
 
                                                         ...provided.draggableProps.style,
@@ -120,14 +144,19 @@ export default function CategorizeRenderer({ categories, categoriesItems, id,par
                         </Droppable>
                     </DroppableSpace>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              
+                
+                <div className='mt-11' >
+                <label className='font-bold text-lg' >Categories : </label>
+                <div className=' flex justify-between flex-wrap  ' >
 
+                    
                     {lists && Object.keys(lists)
                         .filter((listId) => listId !== 'bag')
-                        .map((listId) => (
-                            <div className='min-w-[100px] w-fit min-h-[200px]'>
-
-                                <DroppableSpace>
+                        .map((listId,index) => (
+                            <div className='min-w-[200px] flex flex-col items-center w-fit min-h-[200px] m-3'>
+                         
+                                <DroppableSpace fit={false} color={lightBeautifulColors[(index+1) % lightBeautifulColors.length]} >
                                     <Droppable key={listId} droppableId={listId}>
                                         {(provided) => (
                                             <ul
@@ -137,11 +166,14 @@ export default function CategorizeRenderer({ categories, categoriesItems, id,par
                                                 ref={provided.innerRef}
                                             >
                                                 {lists && lists[listId].map((data, index) => (
+                                                    <div className='m-3'>
+
                                                     <Draggable key={data} draggableId={data} index={index}>
                                                         {(provided) => (
                                                             <li
+                                                            className='m-3'
                                                                 style={{
-                                                                    margin: '5px',
+                                                                   
                                                                     padding: '5px',
                                                                     border: '1px solid #ccc',
                                                                     backgroundColor: 'white',
@@ -157,14 +189,17 @@ export default function CategorizeRenderer({ categories, categoriesItems, id,par
                                                             </li>
                                                         )}
                                                     </Draggable>
+                                                    </div>
                                                 ))}
                                                 {provided.placeholder}
                                             </ul>
                                         )}
                                     </Droppable>
                                 </DroppableSpace>
+                                <label className='font-bold text-lg ' >{listId}</label>
                             </div>
                         ))}
+                </div>
                 </div>
             </DragDropContext>
 

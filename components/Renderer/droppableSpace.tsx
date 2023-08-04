@@ -1,11 +1,11 @@
 import {motion} from 'framer-motion'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-export default function DroppableSpace({children}){
+export default function DroppableSpace({color,fit,children}){
 
 
-
+    console.log(color)
     return(
-        <motion.div className='bg-green-400 w-full m-2 h-full'>
+        <motion.div  style={{ backgroundColor: color }} className={` w-${fit&children?'fit':'full'} m-2 h-${fit&children?'fit':'full'} rounded-xl i flex items-center justify-center flex-wrap border-2 border-black  `}>
       
             {children}
       

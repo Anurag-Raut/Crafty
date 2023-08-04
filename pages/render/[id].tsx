@@ -74,7 +74,7 @@ export default function Render() {
   const renderQuestionComponent = (questionType, data) => {
     switch (questionType) {
       case 'cloze':
-        return <ClozeRenderer id={data.index} contents={data.text} parent={undefined} />;
+        return <ClozeRenderer description={data.description} id={data.index} contents={data.text} parent={undefined} />;
       case 'categorize':
         return (
           <CategorizeRenderer
@@ -97,7 +97,7 @@ export default function Render() {
   };
 
   return (
-    <div>
+    <div className="p-24">
       <Card>
         {questions.map((data, index) => (
           <Card key={index}>

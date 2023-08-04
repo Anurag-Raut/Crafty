@@ -7,9 +7,30 @@ import { useDispatch } from 'react-redux';
 import { updateNestedRenderComponents, updateRenderComponents } from '@/redux/reducers';
 
 
-export default function ClozeRenderer({contents,id,parent}) {
+export default function ClozeRenderer({contents,id,parent,description}) {
   let ind = 0;
-  // const [bag, setBag] = useState([]);
+  const lightBeautifulColors = [
+    '#A0C3D2', // Peach
+    '#FFEECC', // Salmon
+    '#DDFFBB', // Apricot
+    '#FEF2F4', // Watermelon
+    '#D4A5A5', // Misty Rose
+    '#FFC3A0', // Coral
+    '#FF6B6B', // Light Coral
+    '#DAA520', // Goldenrod
+    '#FFAC33', // Sunglow
+    '#FF968A', // Pastel Red
+    '#FFD700', // Gold
+    '#FFB6C1', // Light Pink
+    '#FF9AA2', // Salmon Pink
+    '#F08080', // Light Coral
+    '#FFA07A', // Light Salmon
+    '#FF82AB', // Pink
+    '#FF6F61', // Tangerine
+    '#FF6347', // Tomato
+    '#E9967A', // Dark Salmon
+    '#FFA500', // Orange
+  ];
   const {value:bag,handleChange:setBag}=useRenderHook(id,'bag',parent);
   const {value:spaces,handleChange:setSpaces}=useRenderHook(id,'spaces',parent);
   // const [spaces, setSpaces] = useState([]);
@@ -72,17 +93,26 @@ export default function ClozeRenderer({contents,id,parent}) {
     const destinationType = result.destination.droppableId.startsWith('space') ? 'space' : 'bag';
 
     if (sourceType === 'space' && destinationType === 'space') {
+      // Update spaces by swapping content between source and destination
+      let updatedSpaces = [...spaces];
+      let sourceIndex = updatedSpaces.findIndex((space) => space.id === result.source.droppableId);
+      let destinationIndex = updatedSpaces.findIndex((space) => space.id === result.destination.droppableId);
       
-        // Update spaces by swapping content between source and destination
-        const updatedSpaces = [...spaces];
-        const sourceIndex = updatedSpaces.findIndex((space) => space.id === result.source.droppableId);
-        const destinationIndex = updatedSpaces.findIndex((space) => space.id === result.destination.droppableId);
-
-        const movedItem = updatedSpaces[sourceIndex].content;
-        updatedSpaces[sourceIndex].content = updatedSpaces[destinationIndex].content;
-        updatedSpaces[destinationIndex].content = movedItem;
-      setSpaces(updatedSpaces)
+      // Create shallow clones of objects to modify
+      let sourceSpace = { ...updatedSpaces[sourceIndex] };
+      let destinationSpace = { ...updatedSpaces[destinationIndex] };
       
+      let movedItem = sourceSpace.content;
+      
+      // Modify the cloned objects
+      sourceSpace.content = destinationSpace.content;
+      destinationSpace.content = movedItem;
+      
+      // Update the array with the modified objects
+      updatedSpaces[sourceIndex] = sourceSpace;
+      updatedSpaces[destinationIndex] = destinationSpace;
+    
+      setSpaces(updatedSpaces);
     } else if (sourceType === 'space' && destinationType === 'bag') {
       const sourceSpace = spaces?.find((space) => space.id === result.source.droppableId);
 
@@ -114,14 +144,21 @@ export default function ClozeRenderer({contents,id,parent}) {
 
   return (
     <div className='mb-10 h-contents'>
+      <div>
+      <label className='text-lg font-bold' >Description : </label>
+      <div>{description}</div>
+
+      </div>
+
+     
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <div style={{ padding: '20px', height: '100%' }} className='list-none'>
-          <DroppableSpace>
+        <label className='text-lg font-bold' >Items : </label>
+          <DroppableSpace color={lightBeautifulColors[0]} fit={0} >
             <Droppable droppableId="bag" direction="horizontal">
               {(provided, snapshot) => (
                 <ul
-                  className='list-none flex gap-4 border border-gray-300 p-4 h-full'
-                  ref={provided.innerRef}
+                className='list-none grid grid-cols-3 gap-4 p-4 h-full w-full'                  ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
                   {bag?.map(({ text: item },index) => (
@@ -144,19 +181,19 @@ export default function ClozeRenderer({contents,id,parent}) {
             </Droppable>
           </DroppableSpace>
 
-          <div className='flex flex-wrap mt-5'>
+          <div className='flex flex-wrap mt-5 items-center'>
             {spaces?.map(({ space, id, content }, index) =>
               space === true ? (
-                <div key={id} className='w-[120px] h-[60px] m-2'>
-                  <DroppableSpace>
+                <div key={id} className='w-[120px] h-[60px] m-2 '>
+                  <DroppableSpace color={lightBeautifulColors[(index+1)%lightBeautifulColors.length]} fit={1} >
                     <Droppable
                       key={id}
                       droppableId={id}
-                      isDropDisabled={content !== null}
+                      // isDropDisabled={content !== null}
                     >
                       {(provided, snapshot) => (
                         <div
-                        
+                        className=' '
                           {...provided.droppableProps}
                           ref={provided.innerRef}
                         >
@@ -164,7 +201,7 @@ export default function ClozeRenderer({contents,id,parent}) {
                             <Draggable key={content} draggableId={content} index={index}>
                               {(provided) => (
                                 <div
-                                  className='flex justify-center items-center list-none'
+                                  className='flex justify-center  items-center list-none'
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}

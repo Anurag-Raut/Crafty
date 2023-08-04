@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       colors: {
         // Define your custom colors here
-        "base-100": "#F6F4EB", 
+        "base-100": "#F8F6F4", 
         "base-400":"#F5F5F5",
         "base-300":"#D4E2D4",
       },

@@ -4,10 +4,12 @@ import { Item } from "../item";
 const { Reorder, useDragControls } = require("framer-motion")
 import Card from "../card/cards";
 import { useHook } from "@/hooks/reduxhook";
+import InputText from "../inputText";
 
 
 
 export default function Cloze({ id,parent }:{parent?:string,id:string}) {
+    const {value:description,handleChange:setDescription}=useHook(id,'description',parent);
     const {value:text,handleChange:setText}=useHook(id,'text',parent)
     const [content, setContent] = useState<string>(text);
     const {value:underlinedContents,handleChange:setUnderlinedContents}=useHook(id,'underlinedContents',parent)
@@ -87,6 +89,11 @@ export default function Cloze({ id,parent }:{parent?:string,id:string}) {
 
 
             <div>
+                <div>
+                    <InputText onChange={(e)=>{setDescription(e.target.value)}} value={description} label="Description" placeholder="Enter Description Text " />
+
+            
+                </div>
                 <div
                     ref={divRef}
                     contentEditable={true}

@@ -89,10 +89,10 @@ export default function Comprehension({ id }) {
                 {
                     questions && <Reorder.Group axis="y" className='w-full' onReorder={setQuestions} values={questions}  >
                         {
-                            questions.map((data) => {
+                            questions.map((data,index) => {
                                 return (
                                     
-                                    <Item card={true} key={data.id} id={data.id} item={data} >
+                                    <Item card={true} pos={index} parentId={id} comprehension={true} key={data.id} id={data.id} item={data} >
                             
                                         {renderQuestionComponent(data.type, data.id)}
                                     
