@@ -19,7 +19,7 @@ export default function Response(){
     useEffect(()=>{
         async function fetchResponse(){
             try {
-                let res = await fetch("http://localhost:3000/api/getResponse", {
+                let res = await fetch("https://crafty-cyan.vercel.app/api/getResponse", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",

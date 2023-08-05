@@ -44,7 +44,7 @@ export default function Render() {
       return;
     }
 
-    const apiUrl = `http://localhost:3000/api/getform`;
+    const apiUrl = `https://crafty-cyan.vercel.app/api/getform`;
 
     const requestData = {
       id: id,

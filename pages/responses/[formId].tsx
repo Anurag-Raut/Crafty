@@ -21,7 +21,7 @@ export default function Response(){
         async function fetchResponse(){
             console.log(formId)
             try {
-                let res = await fetch("http://localhost:3000/api/getAllResponses", {
+                let res = await fetch("https://crafty-cyan.vercel.app/api/getAllResponses", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
