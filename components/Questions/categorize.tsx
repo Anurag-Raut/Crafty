@@ -4,9 +4,12 @@ import InputText from '../inputText';
 import { motion } from "framer-motion"
 import Select from '../select';
 import { useHook } from '@/hooks/reduxhook';
+import ImageUpload from '../custom-components/ImageUploader';
+import AddButton from '../custom-components/Addbutton';
 export default function Categorize({ id,parent }:{parent?:string,id:string}) {
   const { value: categories, handleChange: setCategories } = useHook(id, 'categories',parent);
   const { value: categoriesItems, handleChange: setCategoriesItems } = useHook(id, 'categoriesItems',parent);
+  const {value:image,handleChange:setImage}=useHook(id,'image',parent);
 
   const { value: description, handleChange: setDescription } = useHook(id, 'description',parent)
   console.log(categories, 'cat')
@@ -55,7 +58,7 @@ export default function Categorize({ id,parent }:{parent?:string,id:string}) {
     <Card color={'base-300'} >
       <div>
         <InputText value={description} label={'description'} onChange={(e) => { setDescription(e.target.value) }} />
-
+        <ImageUpload fileUrl={image} setFileUrl={setImage} />
       </div>
       <div>
         Categories
@@ -67,9 +70,9 @@ export default function Categorize({ id,parent }:{parent?:string,id:string}) {
               )
             })
           }
-          <div onClick={handleAddCategory} className='flex items-center h-9  cursor-pointer my-2'>
-            + Add Category
-          </div>
+          <AddButton onClick={handleAddCategory}  >
+          Add Category</AddButton>
+         
 
 
 
@@ -99,9 +102,9 @@ export default function Categorize({ id,parent }:{parent?:string,id:string}) {
               )
             })
           }
-          <div className='cursor-pointer ' onClick={() => { handleAddCategoryItems() }}>
-            + Add Items
-          </div>
+            <AddButton onClick={handleAddCategoryItems}  >
+            Add Items</AddButton>
+          
 
 
         </div>

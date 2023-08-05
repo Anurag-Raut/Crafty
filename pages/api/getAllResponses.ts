@@ -11,9 +11,11 @@ await mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/c
 
     try {
       const { formId } = req.body; 
+      console.log(formId)
 
 
     const results = await ResponsesArray.find({ formID:formId });
+    console.log(results)
 
       if (!results) {
         return res.status(404).json({ error: 'Product not found' });

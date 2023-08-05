@@ -42,7 +42,7 @@ export const Item = ({ item, id, value, card, pos, comprehension, parentId, chil
       <motion.div style={{
         userSelect: 'none',
         cursor: 'default',
-      }} className="flex flex-row items-start"
+      }} className={`flex flex-row ${card?'items-start':'items-center'} `}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         exit={{ scale: 0 }}
@@ -50,7 +50,7 @@ export const Item = ({ item, id, value, card, pos, comprehension, parentId, chil
         onMouseLeave={() => { setShow(0) }}
 
       >
-        <div className="mt-5">
+        <div className={`${card?'mt-5':null}`} >
           <ReorderIcon setDraggable={setDraggable} />
           {
             card && show ?
@@ -65,9 +65,11 @@ export const Item = ({ item, id, value, card, pos, comprehension, parentId, chil
 
           }
         </div>
+          <div>
+          {children}
+          </div>
 
-
-        {children}
+       
       </motion.div>
 
 

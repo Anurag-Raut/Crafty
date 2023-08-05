@@ -5,8 +5,9 @@ import DraggableItem from './draggableItem';
 import { useRenderHook } from '@/hooks/reduxhook';
 import { useDispatch } from 'react-redux';
 import { updateNestedRenderComponents, updateRenderComponents } from '@/redux/reducers';
+import Image from 'next/image';
 
-export default function CategorizeRenderer({ categories, categoriesItems, id, parent }) {
+export default function CategorizeRenderer({ categories, categoriesItems, id, parent,image }) {
     const dispatch = useDispatch();
     const lightBeautifulColors = [
         '#A0C3D2', // Peach
@@ -103,6 +104,14 @@ export default function CategorizeRenderer({ categories, categoriesItems, id, pa
 
 
         <div className='h-full m-2'>
+  {
+                image && <div className="my-2">
+                <div className='font-bold text-lg'>Image : </div>
+
+                 <img src={image} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+            </div>
+            }
+            
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <div className='min-h-[200px] h-full  '>
                     <label className='text-lg font-bold'>Items : </label>

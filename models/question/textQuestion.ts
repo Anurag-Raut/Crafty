@@ -23,7 +23,11 @@ const TextQuestionSchema = new mongoose.Schema({
   maxLimit: {
     type: Number,
     required: true
-  }
+  },
+  image:{
+    type:String,
+
+  },
 }, { strict: false });
 
 const TextQuestion = mongoose.models.TextQuestion || mongoose.model('TextQuestion', TextQuestionSchema);

@@ -45,7 +45,11 @@ const ComprehensionQuestionSchema = new mongoose.Schema({
     type:String,
     required:true
 
-  }
+  },
+  image:{
+    type:String,
+
+  },
 }, { strict: false });
 
 const ComprehensionQuestion = mongoose.models.ComprehensionQuestion || mongoose.model('ComprehensionQuestion', ComprehensionQuestionSchema);

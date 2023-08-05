@@ -7,6 +7,7 @@ import TextResponse from "./textResponse";
 
 
 export default function ResponseComponent({response}){
+    console.log(response,'hemlu')
    
     const renderQuestionComponent = (questionType, data) => {
         switch (questionType) {

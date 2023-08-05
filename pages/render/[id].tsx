@@ -44,7 +44,7 @@ export default function Render() {
       return;
     }
 
-    const apiUrl = `https://crafty-cyan.vercel.app/api/getform`;
+    const apiUrl = `http://localhost:3000/api/getform`;
 
     const requestData = {
       id: id,
@@ -76,10 +76,11 @@ export default function Render() {
   const renderQuestionComponent = (questionType, data) => {
     switch (questionType) {
       case 'cloze':
-        return <ClozeRenderer description={data.description} id={data.index} contents={data.text} parent={undefined} />;
+        return <ClozeRenderer image={data?.image} description={data.description} id={data.index} contents={data.text} parent={undefined} />;
       case 'categorize':
         return (
           <CategorizeRenderer
+          image={data?.image}
           parent={undefined}
             categories={data.categories}
             categoriesItems={data.categoriesItems}
@@ -87,11 +88,11 @@ export default function Render() {
           />
         );
       case 'mcq':
-        return <McqRenderer parent={undefined} id={data.index} options={data.options} description={data.description}/>  
+        return <McqRenderer image={data?.image} parent={undefined} id={data.index} options={data.options} description={data.description}/>  
       case 'text':
-        return <TextRenderer parent={undefined} id={data.index} descriptionText={data.description} />
+        return <TextRenderer image={data?.image} parent={undefined} id={data.index} descriptionText={data.description} />
       case 'comprehension':
-        return <ComprehensionRenderer id={data.index} descriptionText={data.description} comprehensionText={data.comprehensionText} comprehension_array={data.questions_comprehension} />
+        return <ComprehensionRenderer image={data?.image} id={data.index} descriptionText={data.description} comprehensionText={data.comprehensionText} comprehension_array={data.questions_comprehension} />
       // Add cases for other question types here
       default:
         return null;

@@ -18,7 +18,7 @@ export default function Home() {
     useEffect(() => {
         async function fetchResponse() {
             try {
-                let res = await fetch("https://crafty-cyan.vercel.app/api/getFormsByUserId", {
+                let res = await fetch("http://localhost:3000/api/getFormsByUserId", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

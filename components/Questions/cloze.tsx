@@ -5,6 +5,8 @@ const { Reorder, useDragControls } = require("framer-motion")
 import Card from "../card/cards";
 import { useHook } from "@/hooks/reduxhook";
 import InputText from "../inputText";
+import ImageUpload from "../custom-components/ImageUploader";
+import AddButton from "../custom-components/Addbutton";
 
 
 
@@ -15,6 +17,8 @@ export default function Cloze({ id,parent }:{parent?:string,id:string}) {
     const {value:underlinedContents,handleChange:setUnderlinedContents}=useHook(id,'underlinedContents',parent)
     // const [underlinedContents, setUnderlinedContents] = useState<{}[]>([]);
     // const [text, setText] = useState<string>('')
+    const {value:image,handleChange:setImage}=useHook(id,'image',parent);
+
     console.log(underlinedContents,'underlined')
     const divRef = useRef<HTMLDivElement>(null);
     useEffect(()=>{
@@ -91,13 +95,15 @@ export default function Cloze({ id,parent }:{parent?:string,id:string}) {
             <div>
                 <div>
                     <InputText onChange={(e)=>{setDescription(e.target.value)}} value={description} label="Description" placeholder="Enter Description Text " />
-
+                    <ImageUpload fileUrl={image} setFileUrl={setImage} />
             
                 </div>
+                <div>Enter Content : </div>
                 <div
                     ref={divRef}
                     contentEditable={true}
-                    className="border border-gray-600 p-2 rounded-md"
+                    
+                    className="border border-gray-600 p-2 bg-white rounded-md"
                     placeholder="Enter"
 
                     onInput={(event) => {
@@ -106,10 +112,14 @@ export default function Cloze({ id,parent }:{parent?:string,id:string}) {
                     }}
                     dangerouslySetInnerHTML={{ __html: content }}
                 />
-                <button onClick={handleUnderline}> underline</button>
-                <p>  Reorder the Items in their corrext Sequence </p>
+                <AddButton onClick={handleUnderline}>
+                    UnderLine
+                </AddButton>
+                {/* <button onClick={handleUnderline}> underline</button> */}
+                
             {
                 underlinedContents && <Reorder.Group axis="y" className=' w-[full] ' onReorder={setUnderlinedContents} values={underlinedContents}>
+                <p>  Reorder the Items in their corrext Sequence </p>
                 {underlinedContents?.map((data: any) => (
                     <Item key={data.index} id={data.index} item={data}  >
                         {

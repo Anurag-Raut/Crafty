@@ -11,7 +11,7 @@ import Dropdown from "../dropdown";
 
 
 
-export default function ComprehensionRenderer({descriptionText,comprehensionText,comprehension_array,id}){
+export default function ComprehensionRenderer({descriptionText,comprehensionText,comprehension_array,id,image}){
     const {value:comprehensionArray,handleChange:setComprehensionArray}=useRenderHook(id,'comprehensionArray')
     console.log(comprehensionArray,'abeee');
     const dispatch=useDispatch();
@@ -30,10 +30,11 @@ export default function ComprehensionRenderer({descriptionText,comprehensionText
     const renderQuestionComponent = (questionType, data) => {
         switch (questionType) {
           case 'cloze':
-            return <ClozeRenderer description={data.description} id={data.index} contents={data.text}     parent={id} />;
+            return <ClozeRenderer description={data.description} id={data.index} contents={data.text}  image={data?.image}   parent={id} />;
           case 'categorize':
             return (
               <CategorizeRenderer
+              image={data?.image}
                 categories={data.categories}
                 categoriesItems={data.categoriesItems}
                 id={data.index}
@@ -41,9 +42,9 @@ export default function ComprehensionRenderer({descriptionText,comprehensionText
               />
             );
           case 'mcq':
-            return <McqRenderer     parent={id} id={data.index} options={data.options} description={data.description}/>  
+            return <McqRenderer image={data?.image}    parent={id} id={data.index} options={data.options} description={data.description}/>  
           case 'text':
-            return <TextRenderer     parent={id} id={data.index} descriptionText={data.description} />
+            return <TextRenderer image={data?.image}    parent={id} id={data.index} descriptionText={data.description} />
                    // Add cases for other question types here
           default:
             return null;
@@ -62,6 +63,14 @@ export default function ComprehensionRenderer({descriptionText,comprehensionText
             <div>{descriptionText}</div>
             <label className='text-lg font-bold'>Comprehension : </label>
             <div>{comprehensionText}</div>
+
+            {
+                image && <div className="my-2">
+                <div className='font-bold text-lg'>Image : </div>
+
+                 <img src={image} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+            </div>
+            }
            
             <div>
                 {

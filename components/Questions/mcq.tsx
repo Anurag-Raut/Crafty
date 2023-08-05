@@ -3,12 +3,15 @@ import Card from "../card/cards";
 import InputText from "../inputText";
 import { useState } from "react";
 import { Item } from "../item";
+import ImageUpload from "../custom-components/ImageUploader";
 const { Reorder, useDragControls } = require("framer-motion")
 
 
 export default function MCQ({ id,parent }:{parent?:string,id:string}) {
     const { value: description, handleChange: setDescription } = useHook(id, 'description',parent);
     const { value: options, handleChange: setOptions } = useHook(id, 'options',parent);
+    const {value:image,handleChange:setImage}=useHook(id,'image',parent);
+
     const [text, setText] = useState('');
 
     const handleAdd = () => {
@@ -32,6 +35,7 @@ export default function MCQ({ id,parent }:{parent?:string,id:string}) {
             <div className="w-full">
 
             <InputText value={description} label='Descipttion' placeholder="descriptoion" onChange={(e) => { setDescription(e.target.value) }} />
+            <ImageUpload fileUrl={image} setFileUrl={setImage} />
             <p>Add options</p>
 
             <div className="flex">

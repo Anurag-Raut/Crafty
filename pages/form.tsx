@@ -22,6 +22,7 @@ import { useUser } from '@auth0/nextjs-auth0/client'
 import Modal from '../components/Modal/Modal'
 import InputText from '@/components/inputText'
 import AddButton from '@/components/custom-components/Addbutton'
+import Preview from '@/components/PreviewComponent'
 const { Reorder } = require('framer-motion')
 const inter = Inter({ subsets: ['latin'] })
 interface Question {
@@ -60,6 +61,7 @@ export default function Create() {
   const [mounted, setMounted] = useState(0);
   const dispatch = useDispatch();
   const [type, setType] = useState('text');
+  const [preview,setPreview]=useState(false);
 
   const [name, setname] = useState('')
 
@@ -107,13 +109,29 @@ export default function Create() {
   console.log(questions, 'yfyu')
   return (
     mounted ?
+    
+    <div>
+      <div className='absolute top-10 right-10'>
+         <div className="form-control w-fit">
+    <label className="cursor-pointer label w-[100px] flex justify-center w-fit">
+      <span className="label-text font-bold text-lg ">Preview</span> 
+      <input type="checkbox" onChange={(e)=>{setPreview(e.target.checked)}} className="toggle toggle-primary ml-5"  />
+    </label>
+  </div>
+      {/* <button  onClick={()=>{setPreview(!preview)}} >preview</button> */}
+      </div>
+     
+      {
+        !preview?
+   
       <main
         className={`flex w-full min-h-screen min-w-200 flex-col items-center justify-center p-24 ${inter.className}`}
       >
+        
         <Card color={'base-100'}>
           <Select onChange={(e) => setType(e.target.value)} options={types} />
           <AddButton onClick={() => handleAddItem(type, 0)}  >
-            Add Item</AddButton>
+            Add Question</AddButton>
           <div>
 
 
@@ -167,6 +185,13 @@ export default function Create() {
 
 
       </main>
+     :
+     <Preview questions={questions} />
+
+}
+    </div>
+    
+      
       : null
   )
 }

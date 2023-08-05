@@ -13,6 +13,7 @@ import MCQ from "./mcq";
 import Text from "./text";
 import Categorize from "./categorize";
 import AddButton from "../custom-components/Addbutton";
+import ImageUpload from "../custom-components/ImageUploader";
 interface Question {
     description: string,
     marks?: number,
@@ -33,6 +34,8 @@ export default function Comprehension({ id }) {
     const { value: questions, handleChange: setQuestions } = useHook(id, 'questions_comprehension');
     const { value: description, handleChange: setDescription } = useHook(id, 'description');
     const { value: comprehensionText, handleChange: setComprehensionText } = useHook(id, 'comprehensionText');
+    const {value:image,handleChange:setImage}=useHook(id,'image');
+
     console.log(questions,'questtt');
     const dispatchEvent = useDispatch();
 
@@ -79,6 +82,8 @@ export default function Comprehension({ id }) {
 
             <InputText value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder="Enter description text" label="Description" />
             <InputText value={comprehensionText} onChange={(e) => { setComprehensionText(e.target.value) }} placeholder="Enter comprehension Text" label="Comprehension" />
+
+            <ImageUpload fileUrl={image} setFileUrl={setImage} />
             <div className="flex justify-between items-center" >
                 <p>Type of Question </p>
                 <div className="flex">

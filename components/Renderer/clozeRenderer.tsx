@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { updateNestedRenderComponents, updateRenderComponents } from '@/redux/reducers';
 
 
-export default function ClozeRenderer({contents,id,parent,description}) {
+export default function ClozeRenderer({contents,id,parent,description,image}) {
   let ind = 0;
   const lightBeautifulColors = [
     '#A0C3D2', // Peach
@@ -149,6 +149,14 @@ export default function ClozeRenderer({contents,id,parent,description}) {
       <div>{description}</div>
 
       </div>
+
+      {
+                image && <div className="my-2">
+                <div className='font-bold text-lg'>Image : </div>
+
+                 <img src={image} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+            </div>
+            }
 
      
       <DragDropContext onDragEnd={handleOnDragEnd}>

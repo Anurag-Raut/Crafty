@@ -20,6 +20,10 @@ const CategorizeQuestionSchema = new mongoose.Schema({
     type: [String],
     required: true
   },
+  image:{
+    type:String,
+
+  },
   categoriesItems: [{}] // Define the schema for this property as needed
 }, { strict: false });
 

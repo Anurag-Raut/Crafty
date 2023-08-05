@@ -20,7 +20,11 @@ const ClozeQuestionSchema = new mongoose.Schema({
   text: {
     type: String,
     required: true
-  }
+  },
+  image:{
+    type:String,
+
+  },
 }, { strict: false });
 
 const ClozeQuestion = mongoose.models.ClozeQuestion|| mongoose.model('ClozeQuestion', ClozeQuestionSchema);
