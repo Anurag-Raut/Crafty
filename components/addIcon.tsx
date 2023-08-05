@@ -20,7 +20,7 @@ export default function AddIcon({pos,comprehension,parentId}){
     return(
         <div className="dropdown dropdown-hover">
   <label tabIndex={0} className=""><BiAddToQueue className='scale-125 mt-3 text-green-600 ' /></label>
-  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52">
    {
     ['text','mcq','categorize','cloze','comprehension'].map((type)=>{
         return <li onClick={(e) => handleAddItem(type)}>

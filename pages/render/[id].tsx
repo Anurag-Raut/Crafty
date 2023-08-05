@@ -1,9 +1,11 @@
+import Modal from "@/components/Modal/Modal";
 import CategorizeRenderer from "@/components/Renderer/categorizeRenderer";
 import ClozeRenderer from "@/components/Renderer/clozeRenderer";
 import ComprehensionRenderer from "@/components/Renderer/comprehensionRenderer";
 import McqRenderer from "@/components/Renderer/mcqRenderer";
 import TextRenderer from "@/components/Renderer/textRenderere";
 import Card from "@/components/card/cards";
+import InputText from "@/components/inputText";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -97,7 +99,7 @@ export default function Render() {
   };
 
   return (
-    <div className="p-24">
+    <div className="p-24 min-h-screen h-full w-full">
       <Card>
         {questions.map((data, index) => (
           <Card key={index}>
@@ -106,8 +108,27 @@ export default function Render() {
 
 
         ))}
+         <Modal onClick={async () => {
+            try {
+              await submitResponse();
+              console.log('done')
+              document.getElementById('my_modal_3').classList.remove('modal-open')
+            }
+            catch (error) {
+              console.error(error);
 
-        <button onClick={()=>submitResponse()}>Submit</button>
+            }
+          }
+
+          } >
+            <div className="text-xl font-bold mb-3">
+            Submit Response
+            </div>
+          
+
+          </Modal>
+
+       
       </Card>
     </div>
   );

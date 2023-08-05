@@ -67,7 +67,7 @@ export default function ComprehensionRenderer({descriptionText,comprehensionText
                 {
                    comprehensionArray?.map((data,index) => (
                     
-                    <Dropdown index={index+1} >
+                    <Dropdown label={`Question ${index +1}`} >
                   
                     <Card key={data.id}> {/* Make sure to add a unique 'key' prop */}
                       {renderQuestionComponent(data.type, data)}

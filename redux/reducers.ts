@@ -2,9 +2,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { useEffect } from 'react';
 import { HYDRATE } from "next-redux-wrapper";
+import uniqid from 'uniqid'
 
 const initialState = {
-  Questions: [],
+  Questions: [{
+    type:'text',
+    index:uniqid(),
+    
+  }],
   RenderComponents:[]
 };
 

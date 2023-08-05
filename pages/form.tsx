@@ -19,6 +19,9 @@ import ClozeRenderer from '@/components/Renderer/clozeRenderer'
 import CategorizeRenderer from '@/components/Renderer/categorizeRenderer'
 import Card from '@/components/card/cards'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import Modal from '../components/Modal/Modal'
+import InputText from '@/components/inputText'
+import AddButton from '@/components/custom-components/Addbutton'
 const { Reorder } = require('framer-motion')
 const inter = Inter({ subsets: ['latin'] })
 interface Question {
@@ -58,6 +61,8 @@ export default function Create() {
   const dispatch = useDispatch();
   const [type, setType] = useState('text');
 
+  const [name, setname] = useState('')
+
   useEffect(() => {
     setMounted(1) // Initialize the type on the client side
   }, []);
@@ -84,6 +89,7 @@ export default function Create() {
 
 
   const handleAddItem = (type, index = 0) => {
+
     let id = uniqid();
     const initialState = addItem(id, type, index);
 
@@ -102,11 +108,12 @@ export default function Create() {
   return (
     mounted ?
       <main
-        className={`flex w-full min-h-screen min-w-200 flex-col items-center justify-between p-24 ${inter.className}`}
+        className={`flex w-full min-h-screen min-w-200 flex-col items-center justify-center p-24 ${inter.className}`}
       >
         <Card color={'base-100'}>
           <Select onChange={(e) => setType(e.target.value)} options={types} />
-          <button onClick={() => handleAddItem(type, 0)}>Add Item</button>
+          <AddButton onClick={() => handleAddItem(type, 0)}  >
+            Add Item</AddButton>
           <div>
 
 
@@ -137,11 +144,26 @@ export default function Create() {
           </div>
 
 
+          <Modal onClick={async () => {
+            try {
+              await submit(questions, user.sub, name);
+              console.log('done')
+              document.getElementById('my_modal_3').classList.remove('modal-open')
+            }
+            catch (error) {
+              console.error(error);
 
-          <button onClick={() => { submit(questions,user.sub) }} >Submit</button>
+            }
+          }
+
+          } >
+            <InputText label='Enter Name of the Form' placeholder='Name..' onChange={(e) => { setname(e.target.value) }} />
+
+          </Modal>
+
         </Card>
 
-       
+
 
 
       </main>

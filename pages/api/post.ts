@@ -17,26 +17,12 @@ await mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/c
     case "POST":
 
     try{
-        let {document,userId} = (req.body)
+        let {document,userId,name} = (req.body)
         console.log(document)
-        // const newPost = new QuestionsArray({
-        //   questions:bodyObject.document
-        // });
+
 
         let arr=[]
-    //    document =  [
-    //         {
-    //           description: 'What is your favorite color?',
-    //           type: 'text',
-    //         },
-    //         {
-    //           description: 'Which fruit do you like the most?',
-    //           type: 'mcq',
-    //           options: ['Apple', 'Banana', 'Orange', 'Mango'],
-    //           answers: ['Apple', 'Mango'],
-    //         },
-    //         // Add more questions here
-    //       ]
+ 
 
           document.map((question)=>{
             if(question.type==='text'){
@@ -55,7 +41,7 @@ await mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/c
                 arr.push(new ComprehensionQuestion(question))
             }
           })
-          const newQuestionsArray=new QuestionsArray({questions:arr,userId:userId});
+          const newQuestionsArray=new QuestionsArray({questions:arr,userId:userId,name:name});
   
         await newQuestionsArray.save();
         res.json({message:'done'});

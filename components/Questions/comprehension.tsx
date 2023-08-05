@@ -12,6 +12,7 @@ import { Item } from "../item";
 import MCQ from "./mcq";
 import Text from "./text";
 import Categorize from "./categorize";
+import AddButton from "../custom-components/Addbutton";
 interface Question {
     description: string,
     marks?: number,
@@ -78,10 +79,16 @@ export default function Comprehension({ id }) {
 
             <InputText value={description} onChange={(e) => { setDescription(e.target.value) }} placeholder="Enter description text" label="Description" />
             <InputText value={comprehensionText} onChange={(e) => { setComprehensionText(e.target.value) }} placeholder="Enter comprehension Text" label="Comprehension" />
-            <div className="flex items-center" >
+            <div className="flex justify-between items-center" >
                 <p>Type of Question </p>
+                <div className="flex">
                 <Select onChange={(e) => { setSelected(e.target.value) }} options={types} />
-                <button onClick={() => { handleAddQuestion() }} >Add</button>
+                <AddButton onClick={() =>  handleAddQuestion() }  >
+            Add Item</AddButton>
+                {/* <button onClick={() => { handleAddQuestion() }} >Add</button> */}
+
+                </div>
+              
             </div>
 
             <div className="w-full">
