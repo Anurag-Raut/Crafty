@@ -8,64 +8,64 @@ import { resetState } from '@/redux/reducers';
 import { useDispatch } from 'react-redux';
 import FormCard from '@/components/FormCard.';
 export default function Home() {
-    // const { user, error, isLoading, } = useUser();
-    // const dispatch = useDispatch();
-    // const router = useRouter();
-    // const [logged, setLogged] = useState(0);
-    // const [forms, setForms] = useState([]);
+    const { user, error, isLoading, } = useUser();
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const [logged, setLogged] = useState(0);
+    const [forms, setForms] = useState([]);
 
 
-    // useEffect(() => {
-    //     async function fetchResponse() {
-    //         try {
-    //             let res = await fetch("http://localhost:3000/api/getFormsByUserId", {
-    //                 method: "POST",
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                 },
-    //                 body: JSON.stringify({ userId: user.sub })
-    //             });
-    //             if(!res.ok){
-    //                 throw new Error(`HTTP error! Status: ${res.status}`);
-    //             }
-    //             let result = await res.json();
-    //             setForms(result)
-    //             console.log(result,forms)
+    useEffect(() => {
+        async function fetchResponse() {
+            try {
+                let res = await fetch("http://localhost:3000/api/getFormsByUserId", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ userId: user.sub })
+                });
+                if(!res.ok){
+                    throw new Error(`HTTP error! Status: ${res.status}`);
+                }
+                let result = await res.json();
+                setForms(result)
+                console.log(result,forms)
 
-    //             console.log('New response array saved successfully.', result);
-    //         } catch (error) {
-    //             console.error('Error saving new question array:', error);
-    //         }
+                console.log('New response array saved successfully.', result);
+            } catch (error) {
+                console.error('Error saving new question array:', error);
+            }
 
-    //     }
-    //     fetchResponse();
-    // }, [user?.sub])
+        }
+        fetchResponse();
+    }, [user?.sub])
 
-    // useEffect(() => {
-    //     if (user) {
-    //         setLogged(1);
-    //     }
+    useEffect(() => {
+        if (user) {
+            setLogged(1);
+        }
 
-    //     else {
-    //         setLogged(0);
-    //     }
-    // }, [user])
+        else {
+            setLogged(0);
+        }
+    }, [user])
 
-    // const handleLinkClick = async () => {
+    const handleLinkClick = async () => {
 
-    //     try {
-    //         dispatch(resetState());
-    //         router.push('/form');
-    //     } catch (error) {
-    //         console.error('Error while setting localStorage:', error);
-    //     }
-    //     // router.push('/form');
-    // };
-    console.log(console.log(process.env.AUTH0_SECRET))
+        try {
+            dispatch(resetState());
+            router.push('/form');
+        } catch (error) {
+            console.error('Error while setting localStorage:', error);
+        }
+        // router.push('/form');
+    };
+    console.log(logged)
     return (
         <div className='w-full min-h-screen w-full p-10' >
             
-            {/* {
+            {
 
                 user && <div>
                     < FormCard onClick={handleLinkClick} name={'Create New Form'}  />
@@ -113,7 +113,7 @@ export default function Home() {
                     <a href="/api/auth/login">Login</a>
 
                 </div>
-            </Toggle> */}
+            </Toggle>
 
         </div>
     )
