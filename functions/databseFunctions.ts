@@ -8,7 +8,7 @@ async function submit(document,userId,name){
     const questions=[]
     async function save (){
         try {
-            let res = await fetch("http://localhost:3000/api/post", {
+            let res = await fetch("https://crafty-cyan.vercel.app/api/post", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

@@ -20,7 +20,7 @@ export default function Render() {
     console.log(response);
     async function save (){
       try {
-          let res = await fetch("http://localhost:3000/api/postResponse", {
+          let res = await fetch("https://crafty-cyan.vercel.app/api/postResponse", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export default function Render() {
       return;
     }
 
-    const apiUrl = `http://localhost:3000/api/getform`;
+    const apiUrl = `https://crafty-cyan.vercel.app/api/getform`;
 
     const requestData = {
       id: id,
