@@ -19,7 +19,10 @@ const TextQuestionSchema = new mongoose.Schema({
     type:String,
 
 
-  }
+  },
+  image:{
+    type:String,
+ }
 },  {strict:false});
 
 const TextResponse = mongoose.models.TextQuestion || mongoose.model('TextResponse', TextQuestionSchema);

@@ -43,19 +43,19 @@ export default function Response(){
     const renderQuestionComponent = (questionType, data) => {
         switch (questionType) {
           case 'cloze':
-            return <ClozeResponse description={data.description} spaces={data.spaces} />;
+            return <ClozeResponse image={data?.image} description={data.description} spaces={data.spaces} />;
           case 'categorize':
             return (
-              <CategoriesResponse
+              <CategoriesResponse image={data?.image}
             lists={data.lists}/>
             )
  
           case 'mcq':
-            return <McqResponse options={data.options} description={data.description}/>  
+            return <McqResponse image={data?.image} options={data.options} description={data.description}/>  
           case 'text':
-            return <TextResponse description={data.description} answer={data.answer} />
+            return <TextResponse image={data?.image} description={data.description} answer={data.answer} />
           case 'comprehension':
-             return <ComprehensionResponse  descriptionText={data.description} comprehensionText={data.comprehensionText} comprehension_array={data.comprehensionArray} />
+             return <ComprehensionResponse image={data?.image}  descriptionText={data.description} comprehensionText={data.comprehensionText} comprehension_array={data.comprehensionArray} />
      
           default:
             return null;

@@ -21,7 +21,10 @@ const ResponsesArraySchema = new mongoose.Schema(
     formID: {
         type:String,
         required:true
-      }
+      },
+      image:{
+        type:String,
+     }
 
   },
   {strict:false}

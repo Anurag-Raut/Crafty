@@ -61,7 +61,7 @@ export default function Create() {
   const [mounted, setMounted] = useState(0);
   const dispatch = useDispatch();
   const [type, setType] = useState('text');
-  const [preview,setPreview]=useState(false);
+  const [preview, setPreview] = useState(false);
 
   const [name, setname] = useState('')
 
@@ -109,89 +109,89 @@ export default function Create() {
   console.log(questions, 'yfyu')
   return (
     mounted ?
-    
-    <div>
-      <div className='absolute top-10 right-10'>
-         <div className="form-control w-fit">
-    <label className="cursor-pointer label w-[100px] flex justify-center w-fit">
-      <span className="label-text font-bold text-lg ">Preview</span> 
-      <input type="checkbox" onChange={(e)=>{setPreview(e.target.checked)}} className="toggle toggle-primary ml-5"  />
-    </label>
-  </div>
-      {/* <button  onClick={()=>{setPreview(!preview)}} >preview</button> */}
-      </div>
-     
-      {
-        !preview?
-   
-      <main
-        className={`flex w-full min-h-screen min-w-200 flex-col items-center justify-center p-24 ${inter.className}`}
-      >
-        
-        <Card color={'base-100'}>
-          <Select onChange={(e) => setType(e.target.value)} options={types} />
-          <AddButton onClick={() => handleAddItem(type, 0)}  >
-            Add Question</AddButton>
-          <div>
 
-
-            {
-              questions && <Reorder.Group axis="y" className=' w-full ' onReorder={update} values={questions}>
-                {
-                  questions?.map((data, index) => {
-                    return (
-
-                      <Item pos={index} key={data.index} id={data.index} item={data} card={true} >
-                        <div className='w-full'>
-                          {renderQuestionComponent(data.type, data.index)}
-                        </div>
-
-
-
-
-                      </Item>
-
-                    )
-                  })
-                }
-              </Reorder.Group>
-            }
-
-
-
+      <div>
+        <div className='absolute top-10 right-10 mt-5'>
+          <div className="form-control w-fit">
+            <label className="cursor-pointer label w-[100px] flex justify-center w-fit">
+              <span className="label-text font-bold text-lg ">Preview</span>
+              <input type="checkbox" onChange={(e) => { setPreview(e.target.checked) }} className="toggle toggle-primary ml-5" />
+            </label>
           </div>
+          
+        </div>
+
+        {
+          !preview ?
+
+            <main
+              className={`flex w-full min-h-screen min-w-200 flex-col items-center justify-center p-24 ${inter.className}`}
+            >
+
+              <Card color={'base-100'}>
+                <Select onChange={(e) => setType(e.target.value)} options={types} />
+                <AddButton onClick={() => handleAddItem(type, 0)}  >
+                  Add Question</AddButton>
+                <div>
 
 
-          <Modal onClick={async () => {
-            try {
-              await submit(questions, user.sub, name);
-              console.log('done')
-              document.getElementById('my_modal_3').classList.remove('modal-open')
-            }
-            catch (error) {
-              console.error(error);
+                  {
+                    questions && <Reorder.Group axis="y" className=' w-full ' onReorder={update} values={questions}>
+                      {
+                        questions?.map((data, index) => {
+                          return (
 
-            }
-          }
-
-          } >
-            <InputText label='Enter Name of the Form' placeholder='Name..' onChange={(e) => { setname(e.target.value) }} />
-
-          </Modal>
-
-        </Card>
+                            <Item pos={index} key={data.index} id={data.index} item={data} card={true} >
+                              <div className='w-full'>
+                                {renderQuestionComponent(data.type, data.index)}
+                              </div>
 
 
 
 
-      </main>
-     :
-     <Preview questions={questions} />
+                            </Item>
 
-}
-    </div>
-    
-      
+                          )
+                        })
+                      }
+                    </Reorder.Group>
+                  }
+
+
+
+                </div>
+
+
+                <Modal onClick={async () => {
+                  try {
+                    await submit(questions, user.sub, name);
+                    console.log('done')
+                    document.getElementById('my_modal_3').classList.remove('modal-open')
+                  }
+                  catch (error) {
+                    console.error(error);
+
+                  }
+                }
+
+                } >
+                  <InputText label='Enter Name of the Form' placeholder='Name..' onChange={(e) => { setname(e.target.value) }} />
+
+                </Modal>
+
+              </Card>
+
+
+
+
+            </main>
+            :
+            <Preview questions={questions} />
+
+        }
+      </div>
+
+
       : null
   )
 }

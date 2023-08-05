@@ -17,6 +17,9 @@ const McqQuestionSchema = new mongoose.Schema({
     type: [{}],
     required: true
   },
+  image:{
+    type:String,
+ }
  
 }, {strict:false} );
 

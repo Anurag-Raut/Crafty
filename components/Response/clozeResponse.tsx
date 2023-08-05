@@ -11,7 +11,7 @@ import DroppableSpace from '../Renderer/droppableSpace';
 import DraggableItem from '../Renderer/draggableItem';
 
 
-export default function ClozeResponse({description,spaces}) {
+export default function ClozeResponse({description,spaces,image}) {
   let ind = 0;
   const lightBeautifulColors = [
     '#A0C3D2', // Peach
@@ -54,6 +54,13 @@ export default function ClozeResponse({description,spaces}) {
       <div>{description}</div>
 
       </div>
+      {
+                image && <div className="my-2">
+                <div className='font-bold text-lg'>Image : </div>
+
+                 <img src={image} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+            </div>
+            }
 
      
       

@@ -17,24 +17,24 @@ import Card from "../card/cards";
 
 
 
-export default function ComprehensionResponse({ descriptionText, comprehensionText, comprehension_array }) {
-
+export default function ComprehensionResponse({ descriptionText, comprehensionText, comprehension_array,image }) {
+    
 
     const renderQuestionComponent = (questionType, data) => {
         switch (questionType) {
             case 'cloze':
-                return <ClozeResponse description={data.description} spaces={data.spaces} />;
+                return <ClozeResponse image={data?.image} description={data.description} spaces={data.spaces} />;
             case 'categorize':
                 return (
-                    <CategoriesResponse
+                    <CategoriesResponse image={data?.image}
                         lists={data.lists}
 
                     />
                 );
             case 'mcq':
-                return <McqResponse options={data.options} description={data.description} />
+                return <McqResponse image={data?.image} options={data.options} description={data.description} />
             case 'text':
-                return <TextResponse answer={data.answer} description={data.description} />
+                return <TextResponse image={data?.image} answer={data.answer} description={data.description} />
 
             default:
                 return null;
@@ -47,6 +47,13 @@ export default function ComprehensionResponse({ descriptionText, comprehensionTe
             <div>{descriptionText}</div>
             <label className='text-lg font-bold'>Comprehension : </label>
             <div>{comprehensionText}</div>
+            {
+                image && <div className="my-2">
+                <div className='font-bold text-lg'>Image : </div>
+
+                 <img src={image} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+            </div>
+            }
 
             <div>
                 {

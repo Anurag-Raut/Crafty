@@ -5,13 +5,20 @@ import { useDispatch } from "react-redux";
 import {motion} from 'framer-motion'
 
 
-export default function McqResponse({options,description}){
+export default function McqResponse({options,description,image}){
   
    
     return(
         <div className="p-4 border rounded shadow">
           <label className="font-bold text-lg" >Description</label>
         <p className="m-3 ">{description}</p>
+        {
+                image && <div className="my-2">
+                <div className='font-bold text-lg'>Image : </div>
+
+                 <img src={image} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+            </div>
+            }
         <label className="font-bold text-lg" >Options : </label>
         <ul>
           {options?.map((option, index) => (

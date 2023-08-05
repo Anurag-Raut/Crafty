@@ -6,7 +6,7 @@ import { updateNestedRenderComponents, updateRenderComponents } from '@/redux/re
 import DroppableSpace from '../Renderer/droppableSpace';
 import DraggableItem from '../Renderer/draggableItem';
 
-export default function CategoriesResponse({ lists }) {
+export default function CategoriesResponse({ lists,image }) {
    
     const lightBeautifulColors = [
         '#A0C3D2', // Peach
@@ -49,6 +49,13 @@ export default function CategoriesResponse({ lists }) {
 
 
         <div className='h-full m-2'>
+             {
+                image && <div className="my-2">
+                <div className='font-bold text-lg'>Image : </div>
+
+                 <img src={image} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+            </div>
+            }
         
                 <div className='min-h-[200px] h-full  '>
                     <label className='text-lg font-bold'>Items : </label>

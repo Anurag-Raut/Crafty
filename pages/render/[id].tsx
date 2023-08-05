@@ -100,7 +100,8 @@ export default function Render() {
   };
 
   return (
-    <div className="p-24 min-h-screen h-full w-full">
+    <div className=" p-24 min-h-screen h-full w-full">
+     
       <Card>
         {questions.map((data, index) => (
           <Card key={index}>

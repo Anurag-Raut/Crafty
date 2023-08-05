@@ -17,6 +17,9 @@ const CategorizeResponseSchema = new mongoose.Schema({
  lists:{
     type:{},
     required:true,
+ },
+ image:{
+    type:String,
  }
 
 }, {strict:false});

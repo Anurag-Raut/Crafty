@@ -24,7 +24,10 @@ const ComprehensionResponseSchema = new mongoose.Schema({
   comprehensionText:{
     type:String,
     required:true
-  }
+  },
+  image:{
+    type:String,
+ }
 }, {strict:false} );
 
 const ComprehensionResponse = mongoose.models.ComprehensionResponse || mongoose.model('ComprehensionResponse', ComprehensionResponseSchema);

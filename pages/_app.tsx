@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { wrapper } from "../redux/store";
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { useEffect } from 'react';
+import Header from '@/components/custom-components/Header';
 
  function App({ Component, pageProps }: AppProps) {
      useEffect(() => {
@@ -12,6 +13,7 @@ import { useEffect } from 'react';
         }, []);
   return (
      <UserProvider>
+      <Header />
        <Component {...pageProps} />
      </UserProvider>
   )
