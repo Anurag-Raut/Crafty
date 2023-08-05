@@ -9,7 +9,7 @@ import ComprehensionResponse from '@/models/response/comprehensionResponse';
 // const {ResponsesArray,TextResponse,McqResponse,ComprehensionResponse,ClozeResponse,CategorizeResponse} =require('../../models/responses')
 export default async function handler(req, res) {
 //   const client = await clientPromise;
-mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty_response?retryWrites=true&w=majority', {
+await mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?retryWrites=true&w=majority', {
  
 });
 //   console.log(db)
@@ -40,12 +40,14 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty_
                 const newRes=response;
                 delete newRes.key;
                 delete newRes.index;
+                delete newRes.bag;
                 arr.push(new CategorizeResponse(newRes))
             }
             else if(response.type==='cloze'){
                 const newRes=response;
                 delete newRes.key;
                 delete newRes.index;
+                delete newRes.bag;
                 arr.push(new ClozeResponse(newRes))
             }
             else if(response.type==='comprehension'){

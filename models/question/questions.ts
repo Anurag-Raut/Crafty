@@ -16,10 +16,22 @@ const QuestionsArraySchema = new mongoose.Schema(
   questions: [{ type: mongoose.Schema.Types.Mixed,
     enum:[ClozeQuestion,CategorizeQuestion,McqQuestion,TextQuestion,ComprehensionQuestion],
       
-    required: true}]
+    required: true}],
+
+    userId:{
+      type:String,
+      required:true
+    },
+    name:{
+      type:String,
+      required:true
+    }
+    
+
 
   },
-  { strict: 'throw' } // Enforce strict validation
+
+  { strict: false } // Enforce strict validation
 );
 const QuestionsArray = mongoose.models.QuestionsArray || mongoose.model('QuestionsArray', QuestionsArraySchema);
 

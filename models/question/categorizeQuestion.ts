@@ -21,7 +21,7 @@ const CategorizeQuestionSchema = new mongoose.Schema({
     required: true
   },
   categoriesItems: [{}] // Define the schema for this property as needed
-}, { strict: 'throw' });
+}, { strict: false });
 
 const CategorizeQuestion =  mongoose.models.CategorizeQuestion || mongoose.model('CategorizeQuestion', CategorizeQuestionSchema);
 

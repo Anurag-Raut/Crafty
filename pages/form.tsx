@@ -18,6 +18,7 @@ import { useHook } from '@/hooks/reduxhook'
 import ClozeRenderer from '@/components/Renderer/clozeRenderer'
 import CategorizeRenderer from '@/components/Renderer/categorizeRenderer'
 import Card from '@/components/card/cards'
+import { useUser } from '@auth0/nextjs-auth0/client'
 const { Reorder } = require('framer-motion')
 const inter = Inter({ subsets: ['latin'] })
 interface Question {
@@ -89,12 +90,13 @@ export default function Create() {
     dispatch(addQuestion(initialState))
 
   };
-  // const {value:questions,handleChange:setQuestions}=useHook('Questions','questions')
   const questions = useSelector((state: any) => state.Questions);
   const update = (newvalue) => {
-    // console.log(index,key,value,'abeee')
+
     dispatch(updateMainQuestions(newvalue));
   };
+  const { user, error, isLoading, } = useUser();
+  console.log(user)
 
   console.log(questions, 'yfyu')
   return (
@@ -136,13 +138,10 @@ export default function Create() {
 
 
 
-          <button onClick={() => { submit(questions) }} >Submit</button>
+          <button onClick={() => { submit(questions,user.sub) }} >Submit</button>
         </Card>
 
-        {/* 
-      <ClozeRenderer contents={questions[0].text} />
-      <CategorizeRenderer categories={questions[1].categories} categoriesItems={questions[1].categoriesItems}/> */}
-
+       
 
 
       </main>

@@ -18,16 +18,17 @@ const ResponsesArraySchema = new mongoose.Schema(
       
     required: true}],
 
-    formID:{
+    formID: {
         type:String,
         required:true
       }
 
   },
- 
+  {strict:false}
+  
  
 );
-const ResponsesArray =  mongoose.model('ResponsesArray', ResponsesArraySchema);
+const ResponsesArray = mongoose.models.ResponsesArray || mongoose.model('ResponsesArray', ResponsesArraySchema);
 
 
 export default ResponsesArray

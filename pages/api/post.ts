@@ -9,7 +9,7 @@ import ComprehensionQuestion from '@/models/question/comprehensionQuestion';
 // const {QuestionsArray,TextQuestion,McqQuestion,ComprehensionQuestion,ClozeQuestion,CategorizeQuestion} =require('../../models/questions')
 export default async function handler(req, res) {
 //   const client = await clientPromise;
-mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?retryWrites=true&w=majority', {
+await mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?retryWrites=true&w=majority', {
  
 });
 //   console.log(db)
@@ -17,7 +17,7 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?
     case "POST":
 
     try{
-        let {document} = (req.body)
+        let {document,userId} = (req.body)
         console.log(document)
         // const newPost = new QuestionsArray({
         //   questions:bodyObject.document
@@ -55,7 +55,7 @@ mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?
                 arr.push(new ComprehensionQuestion(question))
             }
           })
-          const newQuestionsArray=new QuestionsArray({questions:arr});
+          const newQuestionsArray=new QuestionsArray({questions:arr,userId:userId});
   
         await newQuestionsArray.save();
         res.json({message:'done'});

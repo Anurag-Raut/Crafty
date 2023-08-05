@@ -18,8 +18,8 @@ const McqQuestionSchema = new mongoose.Schema({
     required: true
   },
  
-}, );
+}, {strict:false} );
 
-const McqResponse =   mongoose.model('McqResponse', McqQuestionSchema);
+const McqResponse = mongoose.models.McqQuestion||  mongoose.model('McqResponse', McqQuestionSchema);
 
 export default McqResponse;

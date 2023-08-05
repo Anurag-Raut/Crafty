@@ -104,14 +104,14 @@ export default function CategorizeRenderer({ categories, categoriesItems, id, pa
 
         <div className='h-full m-2'>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <div className='min-h-[200px] h-[200px]  '>
+                <div className='min-h-[200px] h-full  '>
                     <label className='text-lg font-bold'>Items : </label>
                     <DroppableSpace fit={false} color={lightBeautifulColors[0]}>
                         <Droppable droppableId={'bag'} >
                             {(provided) => (
                                 <ul
-                                    className="characters h-full flex flex-wrap "
-                                    style={{ listStyle: 'none', padding: '10px', border: '1px solid #ddd' }}
+                                    className="characters  w-full h-full flex flex-wrap "
+                                    style={{ listStyle: 'none', padding: '10px',  }}
                                     {...provided.droppableProps}
                                     ref={provided.innerRef}
                                 >
@@ -119,7 +119,7 @@ export default function CategorizeRenderer({ categories, categoriesItems, id, pa
                                         <Draggable key={data} draggableId={data} index={index}>
                                             {(provided) => (
                                                 <li
-                                                
+                                                    className='m-3'
                                                     style={{
 
                                                         ...provided.draggableProps.style,
@@ -161,7 +161,7 @@ export default function CategorizeRenderer({ categories, categoriesItems, id, pa
                                         {(provided) => (
                                             <ul
                                                 className="characters w-full h-full"
-                                                style={{ listStyle: 'none', padding: '10px', border: '1px solid #ddd' }}
+                                                style={{ listStyle: 'none', padding: '10px' }}
                                                 {...provided.droppableProps}
                                                 ref={provided.innerRef}
                                             >

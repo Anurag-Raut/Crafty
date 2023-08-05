@@ -18,9 +18,10 @@ const TextQuestionSchema = new mongoose.Schema({
   answer:{
     type:String,
 
-  }
-}, );
 
-const TextResponse =  mongoose.model('TextResponse', TextQuestionSchema);
+  }
+},  {strict:false});
+
+const TextResponse = mongoose.models.TextQuestion || mongoose.model('TextResponse', TextQuestionSchema);
 
 export default TextResponse;

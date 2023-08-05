@@ -24,7 +24,7 @@ const TextQuestionSchema = new mongoose.Schema({
     type: Number,
     required: true
   }
-}, { strict: 'throw' });
+}, { strict: false });
 
 const TextQuestion = mongoose.models.TextQuestion || mongoose.model('TextQuestion', TextQuestionSchema);
 

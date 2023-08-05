@@ -46,7 +46,7 @@ const ComprehensionQuestionSchema = new mongoose.Schema({
     required:true
 
   }
-}, { strict: 'throw' });
+}, { strict: false });
 
 const ComprehensionQuestion = mongoose.models.ComprehensionQuestion || mongoose.model('ComprehensionQuestion', ComprehensionQuestionSchema);
 

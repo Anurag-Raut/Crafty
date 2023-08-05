@@ -1,17 +1,19 @@
 const { connectToDatabase } = require("@/db");
 import mongoose from 'mongoose'; 
-import QuestionsArray from '@/models/question/questions';
+import ResponsesArray from '@/models/response/responseArray';
 
 export default async function handler(req, res) {
-mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?retryWrites=true&w=majority');
-//   console.log(db)
+await mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/crafty?retryWrites=true&w=majority', {
+
+});
+
 
 
     try {
-      const { id } = req.body; // Assuming you pass the iid as a query parameter
+      const { id } = req.body; 
 
-      // Query the product by _id
-      const result = await QuestionsArray.findById(id);
+
+      const result = await ResponsesArray.findById(id);
 
       if (!result) {
         return res.status(404).json({ error: 'Product not found' });

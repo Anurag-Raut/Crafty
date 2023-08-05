@@ -18,8 +18,8 @@ const ClozeQuestionSchema = new mongoose.Schema({
     type: [],
     required: true
   }
-}, );
+}, {strict:false} );
 
-const ClozeResponse =  mongoose.model('ClozeResponse', ClozeQuestionSchema);
+const ClozeResponse = mongoose.models.ClozeQuestion|| mongoose.model('ClozeResponse', ClozeQuestionSchema);
 
 export default ClozeResponse;

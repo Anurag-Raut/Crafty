@@ -2,9 +2,9 @@
 
 
 import {connectToDatabase} from '@/db';
-async function submit(document){
+async function submit(document,userId){
 
-    console.log(document,'docuuuuuuuuuu')
+
     const questions=[]
     async function save (){
         try {
@@ -13,7 +13,7 @@ async function submit(document){
                 headers: {
                   "Content-Type": "application/json",
                 },
-                body:JSON.stringify({document})
+                body:JSON.stringify({document,userId:userId})
               });
               let allPosts = await res.json();
         

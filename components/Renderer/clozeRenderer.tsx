@@ -158,7 +158,7 @@ export default function ClozeRenderer({contents,id,parent,description}) {
             <Droppable droppableId="bag" direction="horizontal">
               {(provided, snapshot) => (
                 <ul
-                className='list-none grid grid-cols-3 gap-4 p-4 h-full w-full'                  ref={provided.innerRef}
+                className='list-none flex flex-wrap gap-4 p-4 h-full w-full'                  ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
                   {bag?.map(({ text: item },index) => (
@@ -184,8 +184,8 @@ export default function ClozeRenderer({contents,id,parent,description}) {
           <div className='flex flex-wrap mt-5 items-center'>
             {spaces?.map(({ space, id, content }, index) =>
               space === true ? (
-                <div key={id} className='w-[120px] h-[60px] m-2 '>
-                  <DroppableSpace color={lightBeautifulColors[(index+1)%lightBeautifulColors.length]} fit={1} >
+                <div key={id} className='w-[130px] h-[60px] m-3 '>
+                  <DroppableSpace color={lightBeautifulColors[(index+1)%lightBeautifulColors.length]} content={content} fit={true} >
                     <Droppable
                       key={id}
                       droppableId={id}

@@ -21,7 +21,7 @@ const ClozeQuestionSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, { strict: 'throw' });
+}, { strict: false });
 
 const ClozeQuestion = mongoose.models.ClozeQuestion|| mongoose.model('ClozeQuestion', ClozeQuestionSchema);
 

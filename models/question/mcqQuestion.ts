@@ -21,7 +21,7 @@ const McqQuestionSchema = new mongoose.Schema({
     required: true
   },
  
-}, { strict: 'throw' });
+}, { strict: false });
 
 const McqQuestion = mongoose.models.McqQuestion||  mongoose.model('McqQuestion', McqQuestionSchema);
 

@@ -1,3 +1,4 @@
+import { strict } from 'assert';
 import mongoose from 'mongoose';
 
 const CategorizeResponseSchema = new mongoose.Schema({
@@ -18,8 +19,8 @@ const CategorizeResponseSchema = new mongoose.Schema({
     required:true,
  }
 
-}, );
+}, {strict:false});
 
-const CategorizeResponse =  mongoose.model('CategorizeResponse', CategorizeResponseSchema);
+const CategorizeResponse =  mongoose.models.CategorizeResponse || mongoose.model('CategorizeResponse', CategorizeResponseSchema);
 
 export default CategorizeResponse;

@@ -25,8 +25,8 @@ const ComprehensionResponseSchema = new mongoose.Schema({
     type:String,
     required:true
   }
-}, );
+}, {strict:false} );
 
-const ComprehensionResponse = mongoose.model('ComprehensionResponse', ComprehensionResponseSchema);
+const ComprehensionResponse = mongoose.models.ComprehensionResponse || mongoose.model('ComprehensionResponse', ComprehensionResponseSchema);
 
 export default ComprehensionResponse;

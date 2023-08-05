@@ -6,6 +6,7 @@ import {motion} from 'framer-motion'
 
 
 export default function McqRenderer({options,description,id,parent}){
+  console.log(options,'adas')
     const {value:Options,handleChange:setOptions}=useRenderHook(id,'options',parent)
     
     const dispatch=useDispatch();
