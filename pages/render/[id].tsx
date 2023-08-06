@@ -15,27 +15,27 @@ export default function Render() {
   const [questions, setQuestions] = useState([]);
   console.log(questions);
   const { id } = router.query;
-  const response =useSelector((state:any)=>state.RenderComponents);
-  const submitResponse=()=>{
-    console.log(response);
-    async function save (){
+  const response = useSelector((state: any) => state.RenderComponents);
+  const submitResponse = () => {
+
+    async function save() {
       try {
-          let res = await fetch("https://crafty-cyan.vercel.app/api/postResponse", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body:JSON.stringify({document:response,id:id})
-            });
-            let allPosts = await res.json();
-      
-          console.log('New response array saved successfully.',allPosts);
-        } catch (error) {
-          console.error('Error saving new question array:', error);
-        }
-    
-  }
-  save()
+        let res = await fetch("https://crafty-cyan.vercel.app/api/postResponse", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ document: response, id: id })
+        });
+        let allPosts = await res.json();
+
+        console.log('New response array saved successfully.', allPosts);
+      } catch (error) {
+        console.error('Error saving new question array:', error);
+      }
+
+    }
+    save()
 
   }
 
@@ -80,15 +80,15 @@ export default function Render() {
       case 'categorize':
         return (
           <CategorizeRenderer
-          image={data?.image}
-          parent={undefined}
+            image={data?.image}
+            parent={undefined}
             categories={data.categories}
             categoriesItems={data.categoriesItems}
             id={data.index}
           />
         );
       case 'mcq':
-        return <McqRenderer image={data?.image} parent={undefined} id={data.index} options={data.options} description={data.description}/>  
+        return <McqRenderer image={data?.image} parent={undefined} id={data.index} options={data.options} description={data.description} />
       case 'text':
         return <TextRenderer image={data?.image} parent={undefined} id={data.index} descriptionText={data.description} />
       case 'comprehension':
@@ -101,7 +101,7 @@ export default function Render() {
 
   return (
     <div className=" p-24 min-h-screen h-full w-full">
-     
+
       <Card>
         {questions.map((data, index) => (
           <Card key={index}>
@@ -110,27 +110,28 @@ export default function Render() {
 
 
         ))}
-         <Modal onClick={async () => {
-            try {
-              await submitResponse();
-              console.log('done')
-              document.getElementById('my_modal_3').classList.remove('modal-open')
-            }
-            catch (error) {
-              console.error(error);
-
-            }
+        
+        <Modal onClick={async () => {
+          try {
+            await submitResponse();
+            console.log('done')
+            document.getElementById('my_modal_3').classList.remove('modal-open')
           }
+          catch (error) {
+            console.error(error);
 
-          } >
-            <div className="text-xl font-bold mb-3">
+          }
+        }
+
+        } >
+          <div className="text-xl font-bold mb-3">
             Submit Response
-            </div>
-          
+          </div>
 
-          </Modal>
 
-       
+        </Modal>
+
+
       </Card>
     </div>
   );

@@ -14,7 +14,7 @@ import uniqid from 'uniqid';
 import { Item } from '@/components/item'
 import { submit } from '@/functions/databseFunctions'
 import { addItem } from '@/functions/addItem'
-import { useHook } from '@/hooks/reduxhook'
+import { useHook, useImageHook } from '@/hooks/reduxhook'
 import ClozeRenderer from '@/components/Renderer/clozeRenderer'
 import CategorizeRenderer from '@/components/Renderer/categorizeRenderer'
 import Card from '@/components/card/cards'
@@ -23,6 +23,7 @@ import Modal from '../components/Modal/Modal'
 import InputText from '@/components/inputText'
 import AddButton from '@/components/custom-components/Addbutton'
 import Preview from '@/components/PreviewComponent'
+import ImageUpload from '@/components/custom-components/ImageUploader'
 const { Reorder } = require('framer-motion')
 const inter = Inter({ subsets: ['latin'] })
 interface Question {
@@ -62,11 +63,11 @@ export default function Create() {
   const dispatch = useDispatch();
   const [type, setType] = useState('text');
   const [preview, setPreview] = useState(false);
-
+  const {value:image,handleChange:setImageUrl}=useImageHook('Questions')
   const [name, setname] = useState('')
 
   useEffect(() => {
-    setMounted(1) // Initialize the type on the client side
+    setMounted(1)
   }, []);
 
 
@@ -127,11 +128,22 @@ export default function Create() {
             <main
               className={`flex w-full min-h-screen min-w-200 flex-col items-center justify-center p-24 ${inter.className}`}
             >
-
+             
               <Card color={'base-100'}>
-                <Select onChange={(e) => setType(e.target.value)} options={types} />
+                
+                <div className='flex justify-around'>
+                
+                  <div>
+                  <Select onChange={(e) => setType(e.target.value)} options={types} />
                 <AddButton onClick={() => handleAddItem(type, 0)}  >
                   Add Question</AddButton>
+
+                  </div>
+                  <ImageUpload fileUrl={image} setFileUrl={setImageUrl}  />
+               
+                </div>
+             
+
                 <div>
 
 
@@ -164,7 +176,7 @@ export default function Create() {
 
                 <Modal onClick={async () => {
                   try {
-                    await submit(questions, user.sub, name);
+                    await submit(questions, user.sub, name,image);
                     console.log('done')
                     document.getElementById('my_modal_3').classList.remove('modal-open')
                   }

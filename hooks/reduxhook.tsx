@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateItem, updateNestedItem, updateNestedRenderComponents, updateRenderComponents } from '../redux/reducers';
+import { updateArray, updateItem, updateNestedItem, updateNestedRenderComponents, updateRenderComponents } from '../redux/reducers';
 
 export function useHook(index:string,name:string,parent?:string) {
     console.log(index)
@@ -69,6 +69,19 @@ export function useNestedHook(index:string,name:string,parent:string){
   return { value, handleChange };
 
 
+}
+
+export function useImageHook(name:string){
+  const value=useSelector((state:any)=>{
+    return state[name]?state[name]['image']?state[name]['image']:undefined:undefined
+  })
+  const dispatch=useDispatch();
+
+  const handleChange=(newvalue)=>{
+    dispatch(updateArray({value:newvalue,array:name,name:'image'}))
+  }
+
+  return { value, handleChange };
 }
 
 

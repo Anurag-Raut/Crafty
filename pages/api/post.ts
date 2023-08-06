@@ -17,7 +17,7 @@ await mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/c
     case "POST":
 
     try{
-        let {document,userId,name} = (req.body)
+        let {document,userId,name,image} = (req.body)
         console.log(document)
 
 
@@ -41,7 +41,7 @@ await mongoose.connect('mongodb+srv://admin:admin@cluster0.ainnpst.mongodb.net/c
                 arr.push(new ComprehensionQuestion(question))
             }
           })
-          const newQuestionsArray=new QuestionsArray({questions:arr,userId:userId,name:name});
+          const newQuestionsArray=new QuestionsArray({questions:arr,userId:userId,name:name,image:image});
   
         await newQuestionsArray.save();
         res.json({message:'done'});

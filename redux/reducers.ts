@@ -82,6 +82,17 @@ const itemsSlice = createSlice({
       
       
     },
+    updateArray:(state,action)=>{
+      const {name,value}=action.payload;
+      // console.log(state.Questions.name,name)
+      // if(state[array]?.name){
+        state[name]=value
+      // }
+      
+    
+
+
+    },
     deleteQuestion:(state,action)=>{
       const{index,comprehension,parentId}=action.payload;
       if(comprehension){
@@ -97,6 +108,7 @@ const itemsSlice = createSlice({
     resetState: () => initialState,
     
     
+    
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -108,6 +120,6 @@ const itemsSlice = createSlice({
 }
 });
 
-export const { addQuestion,updateItem,deleteQuestion,updateNestedItem,updateNestedRenderComponents ,updateMainQuestions,updateRenderComponents,resetState} = itemsSlice.actions;
+export const { addQuestion,updateArray,updateItem,deleteQuestion,updateNestedItem,updateNestedRenderComponents ,updateMainQuestions,updateRenderComponents,resetState} = itemsSlice.actions;
 
 export default itemsSlice.reducer;
