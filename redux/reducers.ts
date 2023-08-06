@@ -10,7 +10,8 @@ const initialState = {
     index:uniqid(),
     
   }],
-  RenderComponents:[]
+  RenderComponents:[],
+  image:null
 };
 
 

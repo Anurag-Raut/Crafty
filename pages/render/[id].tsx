@@ -66,7 +66,7 @@ export default function Render() {
         return response.json();
       })
       .then((data) => {
-        setQuestions(data.questions);
+        setQuestions(data);
       })
       .catch((error) => {
         console.error('Fetch error:', error);
@@ -101,16 +101,22 @@ export default function Render() {
 
   return (
     <div className=" p-24 min-h-screen h-full w-full">
+       {
+                questions['image'] && <div className="my-2">
+                <div className='font-bold text-lg'>Image : </div>
 
+                 <img src={ questions['image']} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+            </div>
+            }
       <Card>
-        {questions.map((data, index) => (
+        {questions['questions'].map((data, index) => (
           <Card key={index}>
             {renderQuestionComponent(data.type, data)}
           </Card>
 
 
         ))}
-        
+
         <Modal onClick={async () => {
           try {
             await submitResponse();

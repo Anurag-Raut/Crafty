@@ -3,7 +3,7 @@
 
 import {connectToDatabase} from '@/db';
 async function submit(document,userId,name,image){
-
+  console.log(image,'image')
 
     const questions=[]
     async function save (){

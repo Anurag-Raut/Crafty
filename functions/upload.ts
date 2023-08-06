@@ -10,12 +10,19 @@ async function UploadToIPFS(files){
     console.log(files[0].name,'hellll')
   
 
-
+    try{
+        const cid = await web3Client.put(files) 
+   
+        return 'https://'+cid+'.ipfs.w3s.link/'+files[0].name;  
+    }
+    catch(error){
+        console.log(error)
+        throw error
+    }
  
    
   
-    const cid = await web3Client.put(files) 
-    return 'https://'+cid+'.ipfs.w3s.link/'+files[0].name;  
+  
 
 }
 

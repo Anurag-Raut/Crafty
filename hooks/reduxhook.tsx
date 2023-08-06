@@ -73,7 +73,7 @@ export function useNestedHook(index:string,name:string,parent:string){
 
 export function useImageHook(name:string){
   const value=useSelector((state:any)=>{
-    return state[name]?state[name]['image']?state[name]['image']:undefined:undefined
+    return state.image?state.image:undefined
   })
   const dispatch=useDispatch();
 

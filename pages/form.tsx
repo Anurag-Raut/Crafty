@@ -65,7 +65,7 @@ export default function Create() {
   const [preview, setPreview] = useState(false);
   const {value:image,handleChange:setImageUrl}=useImageHook('Questions')
   const [name, setname] = useState('')
-
+  console.log(image,'image')
   useEffect(() => {
     setMounted(1)
   }, []);

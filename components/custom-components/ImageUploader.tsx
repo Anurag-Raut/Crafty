@@ -9,6 +9,7 @@ export default function ImageUpload({fileUrl,setFileUrl}){
     const handleUpload=async()=>{
         setLoading(true);
         const link=await UploadToIPFS(currFile);
+        console.log(link,'linlll')
         setFileUrl(link);
         setLoading(false);
 
