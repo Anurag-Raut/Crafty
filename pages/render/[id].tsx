@@ -103,8 +103,9 @@ export default function Render() {
     <div className=" p-24 min-h-screen h-full w-full">
       
       <Card>
-        <div className="text-xl font-bold"> Form Name : {data.name}</div>
-        <div className="text-xl font-bold" > Form Id : {data._id} </div>
+        <div className="text-xl font-bold"> Form Name : <span>{data.name}</span></div>
+        <div className="text-xl font-bold " > Form Id : <span >{data._id}</span> </div>
+        <div className="image" ></div>
    
       {
                 data['image'] && <div className="my-2">

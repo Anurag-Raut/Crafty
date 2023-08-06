@@ -19,7 +19,7 @@ export default function Response(){
 
     useEffect(()=>{
         async function fetchResponse(){
-            console.log(formId)
+            
             try {
                 let res = await fetch("https://crafty-cyan.vercel.app/api/getAllResponses", {
                     method: "POST",
@@ -49,8 +49,8 @@ export default function Response(){
     return (
         <div className=" w-full min-h-screen h-full p-10" >
             <div className="font-bold text-3xl">Form information : </div>
-            <div>Form Name : </div>
-            <div>Form Id: {formId}</div>
+            <div className="text-xl font-bold">Form Name : </div>
+            <div className="text-xl font-bold">Form url: <span>https://crafty-cyan.vercel.app/responses/{formId}</span></div>
             <div className="divider"></div> 
             <div className="font-bold text-3xl">Responses : </div>
             <div className="divider"></div> 
