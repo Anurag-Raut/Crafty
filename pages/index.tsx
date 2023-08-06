@@ -61,7 +61,7 @@ export default function Home() {
         }
         // router.push('/form');
     };
-    console.log(logged)
+    console.log(user)
     return (
         <div className='w-full min-h-screen w-full p-10' >
             
