@@ -12,8 +12,8 @@ import { useSelector } from "react-redux";
 
 export default function Render() {
   const router = useRouter();
-  const [questions, setQuestions] = useState([]);
-  console.log(questions);
+  const [data, setData] = useState<any>([]);
+  console.log(data);
   const { id } = router.query;
   const response = useSelector((state: any) => state.RenderComponents);
   const submitResponse = () => {
@@ -66,7 +66,7 @@ export default function Render() {
         return response.json();
       })
       .then((data) => {
-        setQuestions(data);
+        setData(data);
       })
       .catch((error) => {
         console.error('Fetch error:', error);
@@ -101,15 +101,21 @@ export default function Render() {
 
   return (
     <div className=" p-24 min-h-screen h-full w-full">
-       {
-                questions['image'] && <div className="my-2">
+      
+      <Card>
+        <div className="text-xl font-bold"> Form Name : {data.name}</div>
+        <div className="text-xl font-bold" > Form Id : {data._id} </div>
+   
+      {
+                data['image'] && <div className="my-2">
                 <div className='font-bold text-lg'>Image : </div>
 
-                 <img src={ questions['image']} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
+                 <img src={ data['image']} className='max-h-[40vh]   border-2 p-5' alt={'image not able to load'} />
             </div>
             }
-      <Card>
-        {questions['questions']?.map((data, index) => (
+
+
+        {data['questions']?.map((data, index) => (
           <Card key={index}>
             {renderQuestionComponent(data.type, data)}
           </Card>
