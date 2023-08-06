@@ -109,7 +109,7 @@ export default function Render() {
             </div>
             }
       <Card>
-        {questions['questions'].map((data, index) => (
+        {questions['questions']?.map((data, index) => (
           <Card key={index}>
             {renderQuestionComponent(data.type, data)}
           </Card>
